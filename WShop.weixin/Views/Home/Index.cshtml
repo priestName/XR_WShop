@@ -36,7 +36,7 @@
     </div>
 </div>
 <div class="index_main">
-    <p class="index_mtitle"> <a class="on" href="#">热销</a> <a href="#">推荐</a> <a href="index_xianshi.html">限时</a></p>
+    <p class="index_mtitle"> <a class="on" href="@Url.Action("Index","Home")">新品</a> <a href="@Url.Action("Index","Home")?i=2">热销</a> <a href="@Url.Action("Index","Home")?i=3">精品</a></p>
     <ul>
         @foreach (var product in Model.Products)
         {
@@ -93,4 +93,4 @@
         });
     </script>
 }
-</div>
+@*</div>*@

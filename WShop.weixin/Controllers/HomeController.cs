@@ -18,13 +18,14 @@ namespace WShop.weixin.Controllers
         
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int i=1)
         {
             HomeViewModel homeViewModel=new HomeViewModel();
             homeViewModel.NoticeNum = NoticeService.GetCount(n => true);
             homeViewModel.Banners = BannerService.GetEntities(b => true);
             homeViewModel.Notices = NoticeService.GetEntitiesByPpage(3, 1, false, n => true, n => n.ModiTime);
-            homeViewModel.Products = ProductService.GetEntitiesByPpage(3, 1, false, n=>n.Type==1, n => n.CreateTime);
+
+            homeViewModel.Products = ProductService.GetEntitiesByPpage(3, 1, false, n=>n.Type==i, n => n.CreateTime);
             return View(homeViewModel);
         }
     }

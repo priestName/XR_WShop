@@ -44,6 +44,7 @@
     <Compile Include="IBaseService.cs" />
     <Compile Include="INoticeService.cs" />
     <Compile Include="IProductService.cs" />
+    <Compile Include="ISortService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

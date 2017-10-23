@@ -36,16 +36,16 @@
     </div>
 </div>
 <div class="index_main">
-    <p class="index_mtitle"> <a class="on" href="@Url.Action("Index","Home")">新品</a> <a href="@Url.Action("Index","Home")?i=2">热销</a> <a href="@Url.Action("Index","Home")?i=3">精品</a></p>
+    <p class="index_mtitle"> <a class="on" href="@Url.Action("Index","Home")">新品</a> <a href="@Url.Action("Index","Home",new { i=2})">热销</a> <a href="@Url.Action("Index","Home",new { i=3})">精品</a></p>
     <ul>
         @foreach (var product in Model.Products)
         {
             <li>
-                <a href="@Url.Action("","",new {product.Code})"><img src="@product.ProPhotes.First().ImgUrl"></a>
+                <a href="@Url.Action("ProductDet","Product",new {product.Code})"><img src="@product.ProPhotes.First().ImgUrl"></a>
                 <div class="product_text">
                     <h2>
                         <p>@product.Name</p>
-                        <span><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_07.png"></span>
+                        <span><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/Images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_07.png"></span>
                     </h2>
                     <p>@product.Intro</p>
                     <h3>
@@ -72,7 +72,6 @@
 </div>
 @section style
 {
-    <link href="/Content/css/index.css" type="text/css" rel="stylesheet">
     <link href="/Content/css/swiper.min.css" type="text/css" rel="stylesheet">
 }
 @section Script

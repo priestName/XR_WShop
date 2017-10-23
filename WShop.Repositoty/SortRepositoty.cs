@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WShop.EFModel;
+using WShop.IRepositoty;
 
-namespace WShop.IService
+namespace WShop.Repositoty
 {
-    public interface ISortService:IBaseService<Sort>
+    public class SortRepositoty : BaseRepositoty<Sort>, ISortRepositoty
     {
-
     }
 }

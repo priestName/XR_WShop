@@ -1,19 +1,9 @@
 ﻿@model IEnumerable<WShop.EFModel.Product>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/_LayoutMaster.cshtml";
+    Layout = "~/Views/_LayoutSeek.cshtml";
 }
 
-<!--ftop开始-->
-<div class="ftop">
-    <div class="index_search index_search01">
-        <a class="back" onClick="javascript:history.back(-1);"><img src="/Content/Images/icon_03.png"></a>
-        <div>
-            <input type="text" placeholder="请输入您要搜索的产品">
-            <input class="dw" onclick="document.location='search_list.html'" type="button" value=""></div>
-    </div>
-    <div style="clear: both;"></div>
-</div>
 <!--ftop开始--> 
 <div class="search_list">
     <p><a class="on"><span>综合</span></a><a><span>销量</span></a><a><span>评价</span></a><a><span class="bg">价格</span></a></p>

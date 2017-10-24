@@ -296,6 +296,8 @@
     <Content Include="Views\Sort\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\ProductDet.cshtml" />
+    <Content Include="Views\_LayoutSeek.cshtml" />
+    <Content Include="Views\Home\Seek.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "_LayoutMaster.cshtml";
+}
+@section style
+{
+    @RenderSection("style", false)
+}
+@section Script
+{
+    @RenderSection("Script", false)
+}
+
+
+<!--ftop开始-->
+<div class="ftop">
+    <div class="index_search index_search01">
+        <a class="back" onClick="javascript:history.back(-1);"><img src="/Content/Images/icon_03.png"></a>
+        <div>
+            <input type="text" placeholder="请输入您要搜索的产品">
+            <input class="dw" onclick="document.location='@Url.Action("Index","Product")'" type="button" value="">
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+@RenderBody()

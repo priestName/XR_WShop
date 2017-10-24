@@ -28,5 +28,9 @@ namespace WShop.weixin.Controllers
             homeViewModel.Products = ProductService.GetEntitiesByPpage(3, 1, false, n=>n.Type==i, n => n.CreateTime);
             return View(homeViewModel);
         }
+        public ActionResult Seek()
+        {
+            return View();
+        }
     }
 }

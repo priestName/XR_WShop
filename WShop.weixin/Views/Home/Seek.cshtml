@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Seek";
+    Layout = "~/Views/_LayoutSeek.cshtml";
+}
+<div class="search_result">
+    <h2><span>历史搜索</span><img src="/Content/Images/icon_028.png"></h2>
+    <p><a href="#">膨化零食</a><a href="#">母婴</a><a href="#">卫生纸</a><a href="#">洗衣粉</a><a href="#">果蔬</a><a href="#">坚果</a><a href="#">粮油</a></p>
+</div>
+<div class="block_bg"></div>
+<div class="prompt">
+    <img src="/Content/Images/img_011.jpg">
+    <h2>确定要清除历史搜索记录？</h2>
+    <p><a class="cancel">取消</a><a class="delete">删除</a></p>
+</div>
+@section Script
+{
+    <script>
+    $(function(){
+       $(".search_result>h2 img").click(function(){
+          $(".block_bg,.prompt").fadeIn();
+       })
+       $(".block_bg,.prompt p a.cancel,.prompt p a.delete").click(function(){
+          $(".block_bg,.prompt").fadeOut();
+       })
+    })
+    </script>
+}
+

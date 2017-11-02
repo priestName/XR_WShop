@@ -46,7 +46,7 @@
                             {
                                 <li>
                                     <a class="imga"><img src="@sort2.SortImg"></a>
-                                    <a class="txta" href="@Url.Action("index", "Product", new {sort2.Code})">
+                                    <a class="txta" href="@Url.Action("index", "Product", new { sort2.Code,i=1 })">
                                         <span>@sort2.Name</span>
                                     </a>
                                 </li>
@@ -67,7 +67,8 @@
 }
 @section Script
 {
-<script src="/Scripts/base.js" type="text/javascript"></script>
+    <script src="/Scripts/base.js" type="text/javascript"></script>
+
     <script>
         var m=$(window).height()-98;
         $(".fen-nav,.fen-box").css("height",m+"px");
@@ -76,26 +77,29 @@
         var $lii = $(".fenlei .fen-nav li");
         $(".fenlei .fen-box .fenlist").hide();
         $(".fenlei .fen-box .fenlist").first().show();
-        $lii.click(function(){
+        $lii.click(function() {
             var n = $(this).index();
             var h = $(this).height();
             //alert(h)
-            var sunh = n * h-1;
-            $(".fen-nav").animate({"scrollTop":sunh+"px"},1000)
+            var sunh = n * h - 1;
+            $(".fen-nav").animate({ "scrollTop": sunh + "px" }, 1000);
 
 
             $(this).addClass("on").siblings().removeClass("on");
             var indexx = $lii.index(this);
-            $('.fenlei .fen-box').animate({scrollTop: '0px'},500);
+            $('.fenlei .fen-box').animate({ scrollTop: '0px' }, 500);
             $(".fenlei .fen-box .fff .fenlist").hide();
             $(".fenlei .fen-box .fff .fenlist").eq(indexx).show();
-        })
+        });
         var w=$(".fenli li img").width();
         $(".fenli li img").height(w);
-        $(window).resize(function(){
-            var w=parseInt($(".fenli li img").width());
+        $(window).resize(function() {
+            var w = parseInt($(".fenli li img").width());
             $(".fenli li img").height(w);
-        })
-
+        });
+        $(".s").removeClass("current");
+        $(".w").removeClass("current");
+        $(".g").removeClass("current");
+        $(".f").addClass("current");
     </script>
 }

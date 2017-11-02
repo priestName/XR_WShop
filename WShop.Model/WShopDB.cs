@@ -161,10 +161,8 @@ namespace WShop.EFModel
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.Stocks)
-                .WithRequired(e => e.Product)
-                .HasForeignKey(e => e.ProCode)
-                .WillCascadeOnDelete(false);
+                .HasOptional(e => e.Stock)
+                .WithRequired(e => e.Product);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.Sorts)
@@ -188,10 +186,6 @@ namespace WShop.EFModel
                 .Property(e => e.Body)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ProReview>()
-                .Property(e => e.Rate)
-                .IsUnicode(false);
-
             modelBuilder.Entity<ShoppingCart>()
                 .Property(e => e.ProCode)
                 .IsUnicode(false);
@@ -200,12 +194,12 @@ namespace WShop.EFModel
                 .Property(e => e.Code)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Stock>()
-                .Property(e => e.ProCode)
+            modelBuilder.Entity<Sort>()
+                .Property(e => e.UpCode)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Stock>()
-                .Property(e => e.BillCode)
+                .Property(e => e.ProCode)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()

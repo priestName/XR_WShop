@@ -10,16 +10,12 @@ namespace WShop.EFModel
     public partial class Stock
     {
         [Key]
-        [Column(Order = 0)]
         [StringLength(50)]
         public string ProCode { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [StringLength(50)]
-        public string BillCode { get; set; }
-
         public int QTY { get; set; }
+
+        public int sales { get; set; }
 
         public DateTime CreateTime { get; set; }
 

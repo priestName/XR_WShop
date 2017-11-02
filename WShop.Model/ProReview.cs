@@ -9,7 +9,6 @@ namespace WShop.EFModel
     [Table("ProReview")]
     public partial class ProReview
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Required]
@@ -24,11 +23,12 @@ namespace WShop.EFModel
 
         public byte Staty { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Rate { get; set; }
+        public int Rate { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+        [StringLength(500)]
+        public string img { get; set; }
 
         public virtual Customer Customer { get; set; }
 

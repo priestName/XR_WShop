@@ -36,7 +36,7 @@
     </div>
 </div>
 <div class="index_main">
-    <p class="index_mtitle"> <a class="on" href="@Url.Action("Index","Home")">新品</a> <a href="@Url.Action("Index","Home",new { i=2})">热销</a> <a href="@Url.Action("Index","Home",new { i=3})">精品</a></p>
+    <p class="index_mtitle"> <a class="x" href="@Url.Action("Index","Home")">新品</a> <a href="@Url.Action("Index","Home",new { i=2})" class="r">热销</a> <a href="@Url.Action("Index","Home",new { i=3})" class="j">精品</a></p>
     <ul>
         @foreach (var product in Model.Products)
         {
@@ -76,8 +76,8 @@
 }
 @section Script
 {
-<script src="/Scripts/swiper.min.js" type="text/javascript"></script>
-<script src="/Scripts/index.js" type="text/javascript"></script>
+    <script src="/Scripts/swiper.min.js" type="text/javascript"></script>
+    <script src="/Scripts/index.js" type="text/javascript"></script>
     <script>
         var swiper1 = new Swiper('.index_banner', {
             pagination: '.swiper-index',
@@ -90,6 +90,27 @@
             autoplay: 4000,
             direction: 'vertical'
         });
+        $(".f").removeClass("current");
+        $(".w").removeClass("current");
+        $(".g").removeClass("current");
+        $(".s").addClass("current");
+        switch (@Model.tid) {
+        case 1:
+            $(".x").addClass("on");
+            $(".r").removeClass("on");
+            $(".j").removeClass("on");
+            break;
+        case 2:
+            $(".r").addClass("on");
+            $(".x").removeClass("on");
+            $(".j").removeClass("on");
+            break;
+        case 3:
+            $(".j").addClass("on");
+            $(".r").removeClass("on");
+            $(".x").removeClass("on");
+            break;
+        }
     </script>
 }
 @*</div>*@

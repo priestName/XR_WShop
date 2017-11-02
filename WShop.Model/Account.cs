@@ -18,6 +18,8 @@ namespace WShop.EFModel
         [StringLength(50)]
         public string BillCode { get; set; }
 
+        public int AccNum { get; set; }
+
         public DateTime CreateTime { get; set; }
     }
 }

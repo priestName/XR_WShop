@@ -13,7 +13,7 @@
             <li><a href="@Url.Action("ProductDet","Product",new {prod.Code})"><img src="@prod.ProPhotes.First().ImgUrl">
                 <div class="search_item">
                     <p>@prod.Name</p>
-                    <h2><i>￥</i><b>@prod.SellPrice</b><span>月销18252笔</span>
+                    <h2><i>￥</i><b>@prod.SellPrice</b><span>月销 @prod.Stock.sales 笔</span>
                     </h2>
                 </div>
             </a></li>

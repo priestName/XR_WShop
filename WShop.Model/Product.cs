@@ -16,7 +16,6 @@ namespace WShop.EFModel
             ProReviews = new HashSet<ProReview>();
             ProPhotes = new HashSet<ProPhote>();
             ShoppingCarts = new HashSet<ShoppingCart>();
-            Stocks = new HashSet<Stock>();
             Sorts = new HashSet<Sort>();
             Tags = new HashSet<Tag>();
         }
@@ -33,6 +32,8 @@ namespace WShop.EFModel
         [StringLength(100)]
         public string Intro { get; set; }
 
+        public int Type { get; set; }
+
         [Column(TypeName = "numeric")]
         public decimal SellPrice { get; set; }
 
@@ -45,9 +46,14 @@ namespace WShop.EFModel
         [Required]
         public string Detail { get; set; }
 
-        public int Type { get; set; }
-
         public DateTime CreateTime { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Writer { get; set; }
+
+        [StringLength(100)]
+        public string Specs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderBillChi> OrderBillChis { get; set; }
@@ -61,8 +67,7 @@ namespace WShop.EFModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stock> Stocks { get; set; }
+        public virtual Stock Stock { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sort> Sorts { get; set; }

@@ -9,6 +9,7 @@ using WShop.EFModel;
 using WShop.IService;
 using WShop.IRepositoty;
 
+
 namespace WShop.Service
 {
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class, new()

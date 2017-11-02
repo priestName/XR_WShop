@@ -51,11 +51,14 @@
   <ItemGroup>
     <Compile Include="BannerRepositoty.cs" />
     <Compile Include="BaseRepositoty.cs" />
+    <Compile Include="CustomerRepositoty.cs" />
     <Compile Include="DbConexFactory.cs" />
     <Compile Include="NoticeRepositoty.cs" />
     <Compile Include="ProductRepositoty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopCartRepositoty.cs" />
     <Compile Include="SortRepositoty.cs" />
+    <Compile Include="UserRepositoty.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WShop.IRepositoty\WShop.IRepositoty.csproj">

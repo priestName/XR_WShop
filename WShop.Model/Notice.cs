@@ -9,7 +9,6 @@ namespace WShop.EFModel
     [Table("Notice")]
     public partial class Notice
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Required]

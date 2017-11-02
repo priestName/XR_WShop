@@ -27,7 +27,6 @@ namespace WShop.EFModel
         [StringLength(50)]
         public string UpCode { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string SortImg { get; set; }
 

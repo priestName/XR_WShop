@@ -17,22 +17,27 @@ namespace WShop.EFModel
             ShoppingCarts = new HashSet<ShoppingCart>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Required]
         [StringLength(50)]
         public string OpenId { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Phone { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Addrress { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string UImg { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderBillFath> OrderBillFaths { get; set; }

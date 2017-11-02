@@ -1,0 +1,47 @@
+﻿@model WShop.weixin.Models.CusViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutNav.cshtml";
+}
+
+<!--个人中心-->
+<div class="centerindex">
+    <div class="geren">
+        <a class="imga"><img src="@Model.user.First().UImg" alt="头像"></a>
+        <a class="name">@Model.user.First().Name</a>
+        <a class="seta" href="center-set.html"><img src="/Content/Images/centericon_03.png" alt=""></a>
+    </div>
+    <div class="link">
+        <div class="sg">
+            <a class="biga" href="center-order.html"><span class="bg1">我的订单</span><i>查看全部订单</i></a>
+            <div class="kind">
+                <a href="center-order.html"><img src="/Content/Images/centericon_29.png" alt=""><i>待付款</i><b>15</b></a>
+                <a href="center-order.html"><img src="/Content/Images/centericon_19.png" alt=""><i>待发货</i></a>
+                <a href="center-order.html"><img src="/Content/Images/centericon_22.png" alt=""><i>待收货</i></a>
+                <a href="center-order.html"><img src="/Content/Images/centericon_24.png" alt=""><i>待评价</i></a>
+                <a href="center-order-return.html"><img src="/Content/Images/centericon_26.png" alt=""><i>退款/售后</i></a>
+            </div>
+        </div>
+        <div class="sg">
+            <a class="biga bg" href="center-address.html"><span class="bg4">地址管理</span></a>
+            <a class="biga bg" href="center-collect.html"><span class="bg5">我的收藏</span></a>
+            <a class="biga bg" href="center-mind.html"><span class="bg6">意见反馈</span></a>
+            <a class="biga bg" href="center-contact.html"><span class="bg7">联系我们</span></a>
+        </div>
+    </div>
+</div>
+<!--个人中心-->
+@section style
+{
+    <link href="/Content/CSS/center.css" type="text/css" rel="stylesheet">
+}
+@section Script
+{
+    <script>
+        $(".f").removeClass("current");
+        $(".s").removeClass("current");
+        $(".g").removeClass("current");
+        $(".w").addClass("current");
+    </script>
+}
+

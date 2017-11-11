@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WShop.EFModel.Notice>
+@{
+    ViewBag.Title = "最新公告";
+    Layout = "~/Views/_LayoutTops.cshtml";
+}
+
+<div class="notice">
+    <ul>
+        @foreach (var notc in Model)
+        {
+            <li>
+                <a href="@Url.Action("NoticeMain","Home",new {notc.ID})">
+                    <h2><span>@notc.Title</span><i>@notc.ModiTime.ToString("yyyy-MM-dd")</i></h2>
+                    @Html.Raw(notc.Body)
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+

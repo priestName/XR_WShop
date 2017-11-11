@@ -1,0 +1,12 @@
+﻿@model IEnumerable<WShop.EFModel.Notice>
+@{
+    ViewBag.Title = "公告详情";
+    Layout = "~/Views/_LayoutTops.cshtml";
+}
+
+<div class="notice noti">
+    <div class="notice_xq">
+        <h2><span>@Model.First().Title</span><i>@Model.First().ModiTime.ToString("yyyy-MM-dd")</i></h2>
+        <div class="notice_text">@Html.Raw(Model.First().Body)</div>
+    </div>
+</div>

@@ -19,7 +19,14 @@
             <p><a class="person" href="@Url.Action("Index","Customer")">个人中心</a><a href="@Url.Action("Index","Home")">马上去逛逛</a></p>
         </div>
     </div>
-
+    @section Script{
+        <script>
+            $(".f").removeClass("current");
+            $(".w").removeClass("current");
+            $(".s").removeClass("current");
+            $(".g").addClass("current");
+        </script>
+    }
     <!--fixft开始-->
     @*@Html.Action("shopcart_null","ShopCart")*@
 }
@@ -37,32 +44,35 @@
             {
                 <li>
                     <p>
-                        <label><input type="checkbox"></label><a href="product_xq.html"><img src="@shopcaer.Product.ProPhotes.First().ImgUrl"></a>
+                        <label><input class="check" type="checkbox" value="@shopcaer.ProCode"></label><a href="product_xq.html"><img src="@shopcaer.Product.ProPhotes.First().ImgUrl"></a>
                     </p>
                     <div class="shop_car">
-                        <a href="@Url.Action("ProductDet","Product",new {code=@shopcaer.Product.Code})">@shopcaer.Product.Name</a>
+                        <a href="@Url.Action("ProductDet", "Product", new {code = @shopcaer.Product.Code})">@shopcaer.Product.Name</a>
                         <span>规格：@shopcaer.Product.Specs</span>
                         <div class="shu">
-                            <span class="jian"><img src="/Content/Images/icon_016.png"></span><input class="shopcart-td-num" type="text" value="@shopcaer.Qty"/><span class="jia"><img src="/Content/Images/icon_017.png"></span><a><i>￥</i><b>@shopcaer.Product.SellPrice</b></a>
+                            <span class="jian"><img src="/Content/Images/icon_016.png"></span>
+                            <input class="shopcart-td-num" readonly="readonly" type="text" value="@shopcaer.Qty" data-pid="@shopcaer.ProCode"/>
+                            <span class="jia"><img src="/Content/Images/icon_017.png"></span>
+                            <a><i>￥</i><b>@(shopcaer.Product.SellPrice*shopcaer.Qty)</b></a>
                         </div>
                     </div>
-                    <img class="delete" src="/Content/Images/icon_030.png">
+                    <img class="delete" src="/Content/Images/icon_030.png" data-pid="@shopcaer.ProCode">
                 </li>
             }
         </ul>
         <div class="pay">
-            <label><input type="checkbox" style="pointer-events: none"><span>全选</span></label>
+            <label><input type="checkbox" style="pointer-events: none" class="checks"><span>全选</span></label>
             <div class="pay_right">
-                <p><span>合计：<b>￥@Model.First().ShoppingCarts.First().Product.SellPrice</b></span><i>不含运费</i>
+                <p class="xjs"><span>合计：￥<b>0.00</b></span><i>不含运费</i>
                 </p>
-                <a href="confirm_order.html">结算（5）</a>
+                <a class="zj">结算（<em>0</em>）</a>
             </div>
         </div>
         <!--弹窗-->
         <div class="block_bg"></div>
         <div class="delete_box">
             <h2>确定要删除此商品吗？</h2>
-            <p><a class="cancel">取消</a><a class="sure">确定</a>
+            <p><a class="cancel">取消</a><a class="sure" data-pid="">确定</a>
             </p>
         </div>
     </div>
@@ -72,36 +82,80 @@
         $(".w").removeClass("current");
         $(".s").removeClass("current");
         $(".g").addClass("current");
-        $(function() {
+        $(function () {
             var jian = $(".jian");
             var jia = $(".jia");
-            var kunchun = 10; //当库存不足时，可以提醒用户。
-            jia.click(function() {
+            var kunchun = 5; //当库存不足时，可以提醒用户。
+            jia.click(function () {
+                var zprc = $(".xjs b").html() * 1;
                 var n = $(this).siblings("input").val();
+                var prc = $(this).siblings("a").find("b").html() / n;
                 n++;
                 if (n > kunchun) {
-                    alert("库存不足啦!");
-                    $(this).siblings("input").val(kunchun - 1);
+                    alert("对不起本产品人每次限购5个!");
+                    //n = kunchun - 1;
+                    //$(this).siblings("input").val(kunchun);
+                    //$(this).siblings("a").find("b").html(prc * n + ".00");
                     return false;
                 }
                 $(this).siblings("input").val(n);
+                $(this).siblings("a").find("b").html(prc * n + ".00");
+                if ($(".xjs b").html() != 0) {
+                    $(".xjs b").html(zprc + prc + ".00");
+                }
+                $.ajax({
+                        url: "@Url.Action("upCart", "ShopCart")",
+                        data: {
+                            codes: $(this).siblings("input").data("pid"),
+                            a:"+"
+                        },
+                        type: "post",
+                        success: function(result) {
+                            if (result==0) {
+                                alert("数量修改失败");
+                            }
+                            //location.reload();
+                        }
+                    });
                 return false;
             });
-            jian.click(function() {
+            jian.click(function () {
+                var zprc = $(".xjs b").html() * 1;
                 var n = $(this).siblings("input").val();
+                var prc = $(this).siblings("a").find("b").html() / n;
                 n--;
                 if (n < 1) {
-                    $(this).siblings("input").val(n + 1);
+                    //n++;
+                    //$(this).siblings("input").val(n);
+                    //$(this).siblings("a").find("b").html(prc * n + ".00");
                     return false;
                 }
                 $(this).siblings("input").val(n);
+                $(this).siblings("a").find("b").html(prc * n + ".00");
+                if ($(".xjs b").html() != 0) {
+                    $(".xjs b").html(zprc - prc + ".00");
+                }
+                $.ajax({
+                        url: "@Url.Action("upCart", "ShopCart")",
+                        data: {
+                            codes: $(this).siblings("input").data("pid"),
+                            a:"-"
+                        },
+                        type: "post",
+                        success: function(result) {
+                            if (result == 0) {
+                                alert("数量修改失败");
+                            }
+                            //location.reload();
+                        }
+                    });
                 return false;
             });
 
-            $("label input").click(function() {
+            $("label input").click(function () {
                 $(this).parent().toggleClass("on");
                 var flag = 1;
-                $("label input").each(function() {
+                $("label input").each(function () {
                     if (!this.checked) {
                         flag = 0;
                     }
@@ -112,40 +166,108 @@
                     $(".car_pay span").removeClass("on");
                 }
             });
-            $(".pay label span").click(function() {
+            $(".pay label span").click(function () {
                 if ($(this).hasClass("on")) {
                     $(this).removeClass("on");
                     $("label input").prop("checked", false);
                     $("label").removeClass("on");
                 } else {
                     $(this).addClass("on");
-                    $("label input").prop("checked", true);
+                    $("input[type='checkbox']").prop("checked", true);
                     $("label").addClass("on");
                 }
             });
 
-            $(".ftop .all").click(function() {
+            $(".ftop .all").click(function () {
                 var val = $(this).html();
                 if (val == "编辑") {
                     $(this).html("完成");
+                    $(".zj").html("删除");
+                    $(".xjs").toggle();
                 } else {
                     $(this).html("编辑");
+                    $(".zj").html("结算（<em>0</em>）");
+                    $(".xjs").toggle();
                 }
             });
 
-            $(".ftop .all").click(function() {
+            $(".ftop .all").click(function () {
                 $(".shopcar ul li .delete").toggle();
+                $("label input").prop("checked", false);
+                $("label").removeClass("on");
+                $(".pay label span").removeClass("on");
             });
 
 
-            $(".shopcar ul li .delete").click(function() {
+            $(".shopcar ul li .delete").click(function () {
                 $(".block_bg,.delete_box").fadeIn();
+                $(".sure").attr("data-pid", $(this).data("pid"));
             });
-            $(".block_bg,.delete_box p a").click(function() {
+            $(".block_bg,.delete_box p a").click(function (e) {
                 $(".block_bg,.delete_box").fadeOut();
+            });
+            $(".sure").click(function () {
+                $.ajax({
+                    url: "@Url.Action("delectCart", "ShopCart")",
+                    data: {
+                        codes: $(this).data("pid")
+                    },
+                    type: "post",
+                    success: function (result) {
+                        alert(result);
+                        location.reload();
+                    }
+                });
+            });
+            $(".check,.checks").click(function () {
+                if ($(".ftop .all").html() == "编辑") {
+                    obj = document.getElementsByClassName("check");
+                    check_val = [];
+                    $(".xjs b").html(0 + ".00");
+                    for (k in obj) {
+                        if (obj[k].checked) {
+                            var prc = $(obj[k]).parents("p").siblings("div").find("b").html() * 1;
+                            var zprc = $(".xjs b").html() * 1;
+                            var prcs = prc + zprc;
+                            $(".xjs b").html(prcs + ".00");
+                            check_val.push(obj[k].value);
+                        }
+                    }
+                    $(".zj em").html(check_val.length);
+                }
+            });
+            $(".zj").click(function () {
+                var buttext = $(".zj").html();
+                if (buttext == "删除") {
+                    obj = document.getElementsByClassName("check");
+                    var check_val = "";
+                    for (k in obj) {
+                        if (obj[k].checked) {
+                            check_val += obj[k].value + ";";
+                        }
+                    }
+                    if (check_val.length < 1) {
+                        alert("未选中任何项");
+                        return;
+                    }
+                    $.ajax({
+                        url: "@Url.Action("delectCarts", "ShopCart")",
+                        data: {
+                            codes: check_val
+                        },
+                        type: "post",
+                        success: function (result) {
+                            alert(result);
+                            location.reload();
+                        }
+                    });
+                } else {
+
+                }
             });
         });
     </script>
 }
 }
+
 

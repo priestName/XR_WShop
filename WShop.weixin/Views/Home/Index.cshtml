@@ -8,7 +8,7 @@
 <div class="ftop">
     <div class="index_search">
         <input onclick="document.location='@Url.Action("Seek","Home")'" type="text" placeholder="请输入您要搜索的产品">
-        <p><a href="gonggao.html"><img src="/Content/images/icon_05.png"><sup>@Model.NoticeNum</sup></a></p>
+        <p><a href="@Url.Action("Notice","Home")"><img src="/Content/images/icon_05.png"><sup>@Model.NoticeNum</sup></a></p>
     </div>
     <div style="clear: both;"></div>
 </div>
@@ -30,7 +30,7 @@
         <div class="swiper-wrapper">
             @foreach (var notice in Model.Notices)
             {
-                <a class="swiper-slide" href="@Url.Action("index","Notice",new {notice.ID})"><i>@notice.Title</i>@notice.Body</a>
+                <a class="swiper-slide" href="@Url.Action("index","Notice",new {notice.ID})"><i>@notice.Lab</i>@notice.Body...</a>
             }
         </div>
     </div>

@@ -60,5 +60,10 @@ namespace WShop.weixin.Controllers
             Response.Write(ts);
             Response.End();
         }
+
+        public void LikePro()
+        {
+            CusPod cuspods = new CusPod();
+        }
     }
 }

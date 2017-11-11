@@ -14,6 +14,7 @@ namespace WShop.EFModel
 
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
+        public virtual DbSet<CusPod> CusPods { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Notice> Notices { get; set; }
         public virtual DbSet<OrderBillChi> OrderBillChis { get; set; }
@@ -25,6 +26,7 @@ namespace WShop.EFModel
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public virtual DbSet<Sort> Sorts { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -39,6 +41,10 @@ namespace WShop.EFModel
                 .Property(e => e.BillCode)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<CusPod>()
+                .Property(e => e.ProCode)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Customer>()
                 .Property(e => e.OpenId)
                 .IsUnicode(false);
@@ -46,6 +52,12 @@ namespace WShop.EFModel
             modelBuilder.Entity<Customer>()
                 .Property(e => e.Phone)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.CusPods)
+                .WithRequired(e => e.Customer)
+                .HasForeignKey(e => e.CusId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.OrderBillFaths)
@@ -135,6 +147,12 @@ namespace WShop.EFModel
             modelBuilder.Entity<Product>()
                 .Property(e => e.Detail)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.CusPods)
+                .WithRequired(e => e.Product)
+                .HasForeignKey(e => e.ProCode)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.OrderBillChis)

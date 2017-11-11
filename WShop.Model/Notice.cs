@@ -22,5 +22,9 @@ namespace WShop.EFModel
         public int PostUserId { get; set; }
 
         public DateTime ModiTime { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string Lab { get; set; }
     }
 }

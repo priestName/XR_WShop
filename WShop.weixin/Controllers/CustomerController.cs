@@ -21,5 +21,20 @@ namespace WShop.weixin.Controllers
             cusViewModel.user = customerService.GetEntities(n => n.ID ==Convert.ToInt32(Session["cusId"]));
             return View(cusViewModel);
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+        public ActionResult Back()
+        {
+            return View();
+        }
+        public ActionResult LikePro()
+        {
+            var CusPro=customerService.GetEntities(n => n.ID == Convert.ToInt32(Session["cusId"]));
+            return View(CusPro);
+        }
+
     }
 }

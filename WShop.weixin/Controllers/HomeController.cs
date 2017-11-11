@@ -20,6 +20,7 @@ namespace WShop.weixin.Controllers
         public INoticeService NoticeService { get; set; }
         public IProductService ProductService { get; set; }
         public ICustomerService CustomerService { get; set; }
+        public IShopCartService ShopCartService { get; set; }
         // GET: Home
         public ActionResult Index(int i=1)
         {
@@ -31,7 +32,8 @@ namespace WShop.weixin.Controllers
             homeViewModel.Products = ProductService.GetEntitiesByPpage(3, 1, false, n=>n.Type==i, n => n.CreateTime);
 
             homeViewModel.user= Session["userinfo"] as OAuthUserInfo;
-            //Session[""]= CustomerService.GetCount(n => n.ProReviews.First().CusId==1);
+            //homeViewModel.caresum= ShopCartService.GetCount(n => n.CusId == 1);
+            //Session["cartNum"] = homeViewModel.caresum;
 
             homeViewModel.tid = i;
             //addCus(homeViewModel.user);
@@ -42,6 +44,17 @@ namespace WShop.weixin.Controllers
         public ActionResult Seek()
         {
             return View();
+        }
+
+        public ActionResult Notice()
+        {
+            var notice= NoticeService.GetEntities(n => true);
+            return View(notice);
+        }
+        public ActionResult NoticeMain(int ID)
+        {
+            var notice = NoticeService.GetEntities(n =>n.ID==ID);
+            return View(notice);
         }
         //public void addCus(OAuthUserInfo cus)
         //{

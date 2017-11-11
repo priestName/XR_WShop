@@ -319,6 +319,12 @@
     <Content Include="Views\ShopCart\Index.cshtml" />
     <Content Include="Views\OAuth\JsSdkconfig.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\_LayoutTops.cshtml" />
+    <Content Include="Views\Home\Notice.cshtml" />
+    <Content Include="Views\Home\NoticeMain.cshtml" />
+    <Content Include="Views\Customer\About.cshtml" />
+    <Content Include="Views\Customer\Back.cshtml" />
+    <Content Include="Views\Customer\LikePro.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

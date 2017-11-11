@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "_LayoutMaster.cshtml";
+}
+@section style
+{
+    @RenderSection("style", false)
+}
+@section Script
+{
+    @RenderSection("Script", false)
+}
+
+
+<div class="ftop">
+    <a class="back" onClick="javascript:history.back(-1);"><img src="/Content/Images/icon_03.png"></a>
+    <h2>@ViewBag.Title</h2>
+    <a class="comea">&nbsp;</a>
+    <div style="clear: both;"></div>
+</div>
+@RenderBody()

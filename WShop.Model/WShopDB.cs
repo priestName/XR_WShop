@@ -16,6 +16,7 @@ namespace WShop.EFModel
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<CusPod> CusPods { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<FeedBack> FeedBacks { get; set; }
         public virtual DbSet<Notice> Notices { get; set; }
         public virtual DbSet<OrderBillChi> OrderBillChis { get; set; }
         public virtual DbSet<OrderBillFath> OrderBillFaths { get; set; }
@@ -26,7 +27,6 @@ namespace WShop.EFModel
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public virtual DbSet<Sort> Sorts { get; set; }
         public virtual DbSet<Stock> Stocks { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -76,6 +76,10 @@ namespace WShop.EFModel
                 .WithRequired(e => e.Customer)
                 .HasForeignKey(e => e.CusId)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<FeedBack>()
+                .Property(e => e.FTel)
+                .IsFixedLength();
 
             modelBuilder.Entity<Notice>()
                 .Property(e => e.Body)

@@ -14,6 +14,7 @@ namespace WShop.weixin.Controllers
         public ISortService SortService { get; set; }
         public IShopCartService ShopCartService { get; set; }
         public ICustomerService CustomerService { get; set; }
+        public ICusPodService CusPodService { get; set; }
         // GET: Product
         public ActionResult Index(string Code,int i)
         {
@@ -63,7 +64,30 @@ namespace WShop.weixin.Controllers
 
         public void LikePro()
         {
+            string ts = "";
             CusPod cuspods = new CusPod();
+            cuspods.CusId =Convert.ToInt32(Session["cusId"]);
+            cuspods.ProCode = Request["codes"];
+            cuspods.CreateTime = DateTime.Now;
+            if (CusPodService.GetCount(n=>n.CusId==cuspods.CusId && n.ProCode== cuspods.ProCode) >0)
+            {
+                ts = "取消收藏失败";
+                if (CusPodService.Remov(CusPodService.GetEntity(n => n.CusId == cuspods.CusId && n.ProCode == cuspods.ProCode)))
+                {
+                    ts = "取消收藏成功";
+                }
+            }
+            else
+            {
+                ts = "添加收藏失败";
+                if (CusPodService.Add(cuspods)) 
+                {
+                    ts = "添加收藏成功";
+                }
+            }
+            Response.ContentType = "text/plain";
+            Response.Write(ts);
+            Response.End();
         }
     }
 }

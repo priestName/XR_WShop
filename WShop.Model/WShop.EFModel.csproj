@@ -55,6 +55,7 @@
     <Compile Include="Banner.cs" />
     <Compile Include="CusPod.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="FeedBack.cs" />
     <Compile Include="Notice.cs" />
     <Compile Include="OrderBillChi.cs" />
     <Compile Include="OrderBillFath.cs" />
@@ -66,7 +67,6 @@
     <Compile Include="ShoppingCart.cs" />
     <Compile Include="Sort.cs" />
     <Compile Include="Stock.cs" />
-    <Compile Include="sysdiagram.cs" />
     <Compile Include="SystemConfig.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="User.cs" />

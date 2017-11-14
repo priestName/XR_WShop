@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="BannerService.cs" />
     <Compile Include="BaseService.cs" />
+    <Compile Include="CusPodService.cs" />
     <Compile Include="CustomerService.cs" />
+    <Compile Include="FeedBackService.cs" />
     <Compile Include="NoticeService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -51,8 +51,10 @@
   <ItemGroup>
     <Compile Include="BannerRepositoty.cs" />
     <Compile Include="BaseRepositoty.cs" />
+    <Compile Include="CusPodRepositoty.cs" />
     <Compile Include="CustomerRepositoty.cs" />
     <Compile Include="DbConexFactory.cs" />
+    <Compile Include="FeedBackRepositoty.cs" />
     <Compile Include="NoticeRepositoty.cs" />
     <Compile Include="ProductRepositoty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

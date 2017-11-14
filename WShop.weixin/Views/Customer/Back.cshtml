@@ -7,8 +7,8 @@
 <!--个人中心-意见反馈-->
 <div class="mind">
     <div class="fill">
-        <p>手机号码:<input type="tel" style="border:none"/></p>
-        <textarea placeholder="请输入您的反馈内容"></textarea>
+        <p>手机号码:<input class="tels" type="tel" style="border:none"/></p>
+        <textarea placeholder="请输入您的反馈内容" class="bodys"></textarea>
     </div>
     <h6>请详细描述您遇到的问题，有助于我们快速定位并解决问题,温馨提示：您提交的内容不能超过500字符！</h6>
 </div>
@@ -17,4 +17,38 @@
 @section style
 {
     <link href="/Content/Css/center.css" type="text/css" rel="stylesheet">
+}
+@section Script
+{
+    <script type="text/javascript">
+        $(".makesure").click(function() {
+            var tel = $(".tels").val();
+            var bodys = $(".bodys").val();
+            alert(tel.length);
+            if (tel=="") {
+                alert("请输入正确的手机号码");
+                return;
+            } else if (tel.length != 11) {
+                alert("请输入正确的手机号码");
+                return;
+            } else if (bodys=="") {
+                alert("反馈内容不能为空");
+                return;
+            } else if (bodys.length > 1000) {
+                alert("反馈内容不能多于1000字");
+                return;
+            }
+            $.ajax({
+                url: "@Url.Action("addback", "Customer")",
+                data: {
+                    tels: tel,
+                    texts: bodys
+                },
+                type: "post",
+                success: function(result) {
+                    alert(result);
+                }
+            });
+        })
+    </script>
 }

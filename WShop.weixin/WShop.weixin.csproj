@@ -325,6 +325,7 @@
     <Content Include="Views\Customer\About.cshtml" />
     <Content Include="Views\Customer\Back.cshtml" />
     <Content Include="Views\Customer\LikePro.cshtml" />
+    <Content Include="Views\Customer\address.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

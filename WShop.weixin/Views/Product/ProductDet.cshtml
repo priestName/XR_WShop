@@ -296,13 +296,19 @@
             $.ajax({
                 url: "@Url.Action("LikePro", "Product")",
                 data: {
-                codes: "@Model.First().Code"
+                    codes: "@Model.First().Code"
                 },
-            type: "post",
-            success: function(result) {
-                alert(result);
-            }
+                type: "post",
+                success: function(result) {
+                    alert(result);
+                }
+            });
         });
+
+        $(function() {
+            if (@Model.First().CusPods.Count > 0) {
+                $(".Like").addClass("on");
+            }
         });
     </script>
 }

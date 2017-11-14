@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="IBannerService.cs" />
     <Compile Include="IBaseService.cs" />
+    <Compile Include="ICusPodService.cs" />
     <Compile Include="ICustomerService.cs" />
+    <Compile Include="IFeedBackService.cs" />
     <Compile Include="INoticeService.cs" />
     <Compile Include="IProductService.cs" />
     <Compile Include="IShopCartService.cs" />

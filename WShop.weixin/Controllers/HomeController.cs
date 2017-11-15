@@ -38,7 +38,9 @@ namespace WShop.weixin.Controllers
             homeViewModel.tid = i;
             //addCus(homeViewModel.user);
             Session["openid"] = "oWY-Owxt2VJAiHNj23fdowUP0olE";
-            Session["cusId"]= CustomerService.GetEntities(n => n.OpenId == Session["openid"].ToString()).First().ID;
+            var cus = CustomerService.GetEntity(n => n.OpenId == Session["openid"].ToString());
+            Session["cusId"]= cus.ID;
+            Session["tel"] = cus.Phone;
             return View(homeViewModel);
         }
         public ActionResult Seek()
@@ -56,24 +58,40 @@ namespace WShop.weixin.Controllers
             var notice = NoticeService.GetEntities(n =>n.ID==ID);
             return View(notice);
         }
+
+        public void addTel()
+        {
+            var ts = "100";
+            var tel=Request["codes"];
+            Customer cus = CustomerService.GetEntity(n => n.ID == Convert.ToInt32(Session["cusId"]));
+            cus.Phone = tel;
+            if (CustomerService.Add(cus))
+            {
+                ts = "200";
+            }
+            Response.ContentType = "text/plain";
+            Response.Write(ts);
+            Response.End();
+        }
+
         //public void addCus(OAuthUserInfo cus)
-        //{
-        //    HomeViewModel homeViewModel = new HomeViewModel();
-        //    Customer cust = new Customer();
-        //    cust.OpenId = cus.openid;
-        //    cust.UImg= cus.headimgurl;
-        //    cust.Name = cus.nickname;
-        //    cust.CreateTime = DateTime.Now;
-        //    if (CustomerService.GetCount(n => n.OpenId == cus.openid) < 1)
-        //    {
-        //        CustomerService.Add(cust);
-        //    }
-        //    else if(CustomerService.GetCount(n => n.UImg == cus.headimgurl && n.Name == cus.nickname) < 1)
-        //    {
-        //        cust.ID = CustomerService.GetEntities(c => c.OpenId == cust.OpenId).First().ID;
-        //        CustomerService.Add(cust);
-        //    }
-        //    Session["openid"] = cus.openid;
-        //}
-    }
+            //{
+            //    HomeViewModel homeViewModel = new HomeViewModel();
+            //    Customer cust = new Customer();
+            //    cust.OpenId = cus.openid;
+            //    cust.UImg= cus.headimgurl;
+            //    cust.Name = cus.nickname;
+            //    cust.CreateTime = DateTime.Now;
+            //    if (CustomerService.GetCount(n => n.OpenId == cus.openid) < 1)
+            //    {
+            //        CustomerService.Add(cust);
+            //    }
+            //    else if(CustomerService.GetCount(n => n.UImg == cus.headimgurl && n.Name == cus.nickname) < 1)
+            //    {
+            //        cust.ID = CustomerService.GetEntities(c => c.OpenId == cust.OpenId).First().ID;
+            //        CustomerService.Add(cust);
+            //    }
+            //    Session["openid"] = cus.openid;
+            //}
+        }
 }

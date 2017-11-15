@@ -82,11 +82,11 @@
         $(".w").removeClass("current");
         $(".s").removeClass("current");
         $(".g").addClass("current");
-        $(function () {
+        $(function() {
             var jian = $(".jian");
             var jia = $(".jia");
             var kunchun = 5; //当库存不足时，可以提醒用户。
-            jia.click(function () {
+            jia.click(function() {
                 var zprc = $(".xjs b").html() * 1;
                 var n = $(this).siblings("input").val();
                 var prc = $(this).siblings("a").find("b").html() / n;
@@ -104,22 +104,22 @@
                     $(".xjs b").html(zprc + prc + ".00");
                 }
                 $.ajax({
-                        url: "@Url.Action("upCart", "ShopCart")",
-                        data: {
-                            codes: $(this).siblings("input").data("pid"),
-                            a:"+"
-                        },
-                        type: "post",
-                        success: function(result) {
-                            if (result==0) {
-                                alert("数量修改失败");
-                            }
-                            //location.reload();
+                    url: "@Url.Action("upCart", "ShopCart")",
+                    data: {
+                        codes: $(this).siblings("input").data("pid"),
+                        a: "+"
+                    },
+                    type: "post",
+                    success: function(result) {
+                        if (result == 0) {
+                            alert("数量修改失败");
                         }
-                    });
+                        //location.reload();
+                    }
+                });
                 return false;
             });
-            jian.click(function () {
+            jian.click(function() {
                 var zprc = $(".xjs b").html() * 1;
                 var n = $(this).siblings("input").val();
                 var prc = $(this).siblings("a").find("b").html() / n;
@@ -136,26 +136,26 @@
                     $(".xjs b").html(zprc - prc + ".00");
                 }
                 $.ajax({
-                        url: "@Url.Action("upCart", "ShopCart")",
-                        data: {
-                            codes: $(this).siblings("input").data("pid"),
-                            a:"-"
-                        },
-                        type: "post",
-                        success: function(result) {
-                            if (result == 0) {
-                                alert("数量修改失败");
-                            }
-                            //location.reload();
+                    url: "@Url.Action("upCart", "ShopCart")",
+                    data: {
+                        codes: $(this).siblings("input").data("pid"),
+                        a: "-"
+                    },
+                    type: "post",
+                    success: function(result) {
+                        if (result == 0) {
+                            alert("数量修改失败");
                         }
-                    });
+                        //location.reload();
+                    }
+                });
                 return false;
             });
 
-            $("label input").click(function () {
+            $("label input").click(function() {
                 $(this).parent().toggleClass("on");
                 var flag = 1;
-                $("label input").each(function () {
+                $("label input").each(function() {
                     if (!this.checked) {
                         flag = 0;
                     }
@@ -166,7 +166,7 @@
                     $(".car_pay span").removeClass("on");
                 }
             });
-            $(".pay label span").click(function () {
+            $(".pay label span").click(function() {
                 if ($(this).hasClass("on")) {
                     $(this).removeClass("on");
                     $("label input").prop("checked", false);
@@ -178,7 +178,7 @@
                 }
             });
 
-            $(".ftop .all").click(function () {
+            $(".ftop .all").click(function() {
                 var val = $(this).html();
                 if (val == "编辑") {
                     $(this).html("完成");
@@ -191,7 +191,7 @@
                 }
             });
 
-            $(".ftop .all").click(function () {
+            $(".ftop .all").click(function() {
                 $(".shopcar ul li .delete").toggle();
                 $("label input").prop("checked", false);
                 $("label").removeClass("on");
@@ -199,27 +199,27 @@
             });
 
 
-            $(".shopcar ul li .delete").click(function () {
+            $(".shopcar ul li .delete").click(function() {
                 $(".block_bg,.delete_box").fadeIn();
                 $(".sure").attr("data-pid", $(this).data("pid"));
             });
-            $(".block_bg,.delete_box p a").click(function (e) {
+            $(".block_bg,.delete_box p a").click(function(e) {
                 $(".block_bg,.delete_box").fadeOut();
             });
-            $(".sure").click(function () {
+            $(".sure").click(function() {
                 $.ajax({
                     url: "@Url.Action("delectCart", "ShopCart")",
                     data: {
                         codes: $(this).data("pid")
                     },
                     type: "post",
-                    success: function (result) {
+                    success: function(result) {
                         alert(result);
                         location.reload();
                     }
                 });
             });
-            $(".check,.checks").click(function () {
+            $(".check,.checks").click(function() {
                 if ($(".ftop .all").html() == "编辑") {
                     obj = document.getElementsByClassName("check");
                     check_val = [];
@@ -236,7 +236,7 @@
                     $(".zj em").html(check_val.length);
                 }
             });
-            $(".zj").click(function () {
+            $(".zj").click(function() {
                 var buttext = $(".zj").html();
                 if (buttext == "删除") {
                     obj = document.getElementsByClassName("check");
@@ -256,7 +256,7 @@
                             codes: check_val
                         },
                         type: "post",
-                        success: function (result) {
+                        success: function(result) {
                             alert(result);
                             location.reload();
                         }

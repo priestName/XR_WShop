@@ -187,11 +187,21 @@
 .shopcar ul li .shop_car .shu a{ float:right; font-size:12px; height: 22px; line-height: 22px;}
 .shopcar ul li .shop_car .shu a b{font-size:16px; font-family: Arial;}
 .shopcar ul li .delete{ position:absolute; right:0px; top:15px; display:block; display:none;}
-.delete_box{ z-index:999999; display:none; width:280px; background-color:#fff; position:fixed; margin-top:-120px; top:50%;left:50%; margin-left:-140px; border-radius:5px;}
+/*.delete_box{ z-index:999999; display:none; width:280px; background-color:#fff; position:fixed; margin-top:-120px; top:50%;left:50%; margin-left:-140px; border-radius:5px;}
 .delete_box h2{ font-size:16px; text-align:center; padding:20px 15px; border-bottom:1px solid #e5e5e5}
 .delete_box p{ overflow:hidden}
 .delete_box p a{ width:50%; float:left; text-align:center; padding:8px 0; font-size:14px;}
-.delete_box p a.cancel{ border-right:1px solid #e5e5e5;}
+.delete_box p a.cancel{ border-right:1px solid #e5e5e5;}*/
+.delete_box,.btels{ z-index:999999; display:none; width:280px; background-color:#fff; position:fixed; margin-top:-120px; top:50%;left:50%; margin-left:-140px; border-radius:5px;}
+.delete_box h2{ font-size:16px; text-align:center; padding:20px 15px; border-bottom:1px solid #e5e5e5}
+.delete_box p,.btels p{ overflow:hidden}
+.delete_box p a,.btels p a{ width:50%; float:left; text-align:center; padding:8px 0; font-size:14px;}
+.delete_box p a.cancel,.btels p a.cancel{ border-right:1px solid #e5e5e5;}
+
+.btels h2{ font-size:16px; text-align:center; padding:8px 15px; border-bottom:1px solid #e5e5e5}
+.btels input{ font-size:16px;  margin:8px 15px; border: none;text-align:center;}
+.tels {border-bottom:1px solid #e5e5e5;text-align:center;}
+
 .pay{ overflow:hidden; width:100%; background-color:#fff; border-top:1px solid #e6e6e6; position:fixed; left:0px; bottom:52px;}
 .pay label{ float:left; margin-top:12px; padding-left:15px;}
 .pay label span.on{ background-image:url(../images/icon_032.png)}

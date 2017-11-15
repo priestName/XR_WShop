@@ -1,4 +1,5 @@
-﻿
+﻿@using Senparc.Weixin.Helpers.Extensions
+
 @{
     Layout = "_LayoutMaster.cshtml";
 }
@@ -8,6 +9,65 @@
 }
 @section Script
 {
+    <script type="text/javascript">
+        var tel="@Session["tel"]";
+        $(".g").click(function () {
+            event.preventDefault();
+            var urls = this.href;
+            if ( tel== "") {
+                $(".block_bg,.btels").fadeIn();
+                $(".sure").click(function () {
+                    if ($(".Tel").val().length != 11) {
+                        alert("请输入正确的手机号码！");
+                    } else {
+                        aj(urls);
+                    }
+                });
+            } else {
+                location.href = this.href;
+            }
+        });
+        $(".w").click(function () {
+            event.preventDefault();
+            var urls = this.href;
+            if ( tel== "") {
+                $(".block_bg,.btels").fadeIn();
+                $(".sure").click(function () {
+                    if ($(".Tel").val().length != 11) {
+                        alert("请输入正确的手机号码！");
+                    } else {
+                        aj(urls);
+                    }
+                });
+            } else {
+                location.href = this.href;
+            }
+        });
+
+        function aj(furl) {
+            $.ajax({
+                url: "@Url.Action("addTel", "Home")",
+                data: {
+                    codes: $(".Tel").val()
+                },
+            type: "post",
+            success: function (result) {
+                if (result=="100") {
+                    alert("对不起！绑定手机号失败！");
+                } else {
+                    alert("绑定手机号成功！");
+                    $(".block_bg,.btels").fadeOut();
+                    tel = $(".Tel").val();
+                    location.href = furl;
+                }
+                
+            }
+        });
+        }
+        $(".block_bg,.btels p a").click(function() {
+            $(".block_bg,.btels").fadeOut();
+        });
+    </script>
     @RenderSection("Script", false)
 }
 
@@ -17,21 +77,30 @@
 </div>
 <!--fixft开始-->
 <div class="fixft">
-    <a href="@Url.Action("index","Home")"class="s current">
+    <a href="@Url.Action("index", "Home")"class="s current">
         <span><img src="/Content/images/navicon_45.png" class="img1"><img src="/Content/images/navicon_28.png" class="img2"></span>
         <i>首页</i>
     </a>
-    <a href="@Url.Action("Index","Sort")" class="f">
+    <a href="@Url.Action("Index", "Sort")" class="f">
         <span><img src="/Content/images/navicon_48.png" class="img1"><img src="/Content/images/navicon_30.png" class="img2"></span>
         <i>分类</i>
     </a>
-    <a href="@Url.Action("Index","ShopCart")" class="g">
+    <a class="g" href="@Url.Action("Index", "ShopCart")">
         <span><img src="/Content/images/navicon_50.png" class="img1"><img src="/Content/images/navicon_32.png" class="img2"></span>
         <i>购物车</i>
     </a>
-    <a href="@Url.Action("Index","Customer")" class="w">
+    <a class="w" href="@Url.Action("Index", "Customer")">
         <span><img src="/Content/images/navicon_42.png" class="img1"><img src="/Content/images/navicon_35.png" class="img2"></span>
         <i>我的</i>
     </a>
 </div>
 <!--fixft结束-->
+<!--弹窗-->
+<div class="block_bg"></div>
+<div class="btels">
+    <h2>请绑定手机号</h2>
+    <p class="tels"><input type="tel" class="Tel" placeholder="请输入手机号码" /></p>
+    <p>
+        <a class="cancel">取消</a><a class="sure">确定</a>
+    </p>
+</div>

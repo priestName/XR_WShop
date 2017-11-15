@@ -1,8 +1,32 @@
 ﻿
 @{
-    ViewBag.Title = "address";
+    ViewBag.Title = "收货地址";
     Layout = "~/Views/_LayoutTops.cshtml";
 }
 
-<h2>address</h2>
+<!--个人中心-收货地址-->
+<div class="address">
+    <div class="list">
+        <div class="sg">
+            <!--<label></label>-->
+            <a href="center-address-add.html">
+                <span class="name"><i>王小利</i><em>13253425342</em></span>
+                <span class="place"><i>[默认]</i>河南省郑州市金水区祭城路街道商都路与中州大道交叉口建业五栋大楼B座</span>
+            </a>
+        </div>
+        <div class="sg on">
+            <!--<label></label>-->
+            <a href="center-address-add.html">
+                <span class="name"><i>王小利</i><em>13253425342</em></span>
+                <span class="place"><i>[默认]</i>河南省郑州市金水区祭城路街道商都路与中州大道交叉口建业五栋大楼B座</span>
+            </a>
+        </div>
+    </div>
+</div>
+<a class="makesure" href="center-address-add.html">添加收货地址</a>
+<!--个人中心-收货地址-->
 
+@section style
+{
+    <link href="/Content/css/center.css" type="text/css" rel="stylesheet">
+}

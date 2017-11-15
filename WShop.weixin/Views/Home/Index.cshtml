@@ -30,7 +30,7 @@
         <div class="swiper-wrapper">
             @foreach (var notice in Model.Notices)
             {
-                <a class="swiper-slide" href="@Url.Action("index","Notice",new {notice.ID})"><i>@notice.Lab</i>@notice.Body...</a>
+                <a class="swiper-slide" href="@Url.Action("Notice","Home",new {notice.ID})"><i>@notice.Lab</i>@notice.Body.Substring(3,20)...</a>
             }
         </div>
     </div>

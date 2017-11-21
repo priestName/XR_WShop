@@ -208,7 +208,7 @@
             });
             $(".sure").click(function() {
                 $.ajax({
-                    url: "@Url.Action("delectCart", "ShopCart")",
+                    url: "@Url.Action("delectCarts", "ShopCart")",
                     data: {
                         codes: $(this).data("pid")
                     },
@@ -238,18 +238,18 @@
             });
             $(".zj").click(function() {
                 var buttext = $(".zj").html();
+                obj = document.getElementsByClassName("check");
+                var check_val = "";
+                for (k in obj) {
+                    if (obj[k].checked) {
+                        check_val += obj[k].value + ";";
+                    }
+                }
+                if (check_val.length < 1) {
+                    alert("未选中任何项");
+                    return;
+                }
                 if (buttext == "删除") {
-                    obj = document.getElementsByClassName("check");
-                    var check_val = "";
-                    for (k in obj) {
-                        if (obj[k].checked) {
-                            check_val += obj[k].value + ";";
-                        }
-                    }
-                    if (check_val.length < 1) {
-                        alert("未选中任何项");
-                        return;
-                    }
                     $.ajax({
                         url: "@Url.Action("delectCarts", "ShopCart")",
                         data: {
@@ -262,7 +262,21 @@
                         }
                     });
                 } else {
+                    $.ajax({
+                        url: "@Url.Action("CarOrder", "ShopCart")",
+                        data: {
+                        codes: check_val
+                        },
+                    type: "post",
+                    success: function(result) {
+                        if (result != 2000) {
+                            location.href = "@Url.Action("Index", "Order")";
+                        } else {
+                            alert("对不起！产品参数错误！");
+                        }
 
+                    }
+                });
                 }
             });
         });

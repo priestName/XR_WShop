@@ -1,0 +1,182 @@
+﻿@model IEnumerable<WShop.EFModel.OrderBillFath>
+@{
+    ViewBag.Title = "我的订单";
+    Layout = "~/Views/_LayoutMaster.cshtml";
+}
+
+<!--ftop开始-->
+<div class="ftop">
+    <a class="back" onClick="javascript:history.back(-1);"><img src="/Content/Images/icon_03.png"></a>
+    <h2>我的订单</h2>
+    <a class="comea" href="search.html"><img src="/Content/Images/centerorder_03.png" alt="搜索"></a>
+    <div style="clear: both;"></div>
+</div>
+<!--ftop开始-->
+<!--定位分类-->
+<div class="orderkind">
+    <a href="center-order.html" class="on"><span>全部</span></a>
+    <a href="center-order.html"><span>待付款</span></a>
+    <a href="center-order.html"><span>待发货</span></a>
+    <a href="center-order.html"><span>待收货</span></a>
+    <a href="center-order.html"><span>待评价</span></a>
+</div>
+<!--定位分类-->
+<!--个人中心-订单-->
+<div class="centerorder">
+    <div class="list">
+        @foreach (var order in Model)
+        {
+                        <div class="sg ysh">
+                        <a class="num" href="center-order-success.html"><span>订单号：@order.Code</span><i>交易成功</i></a>
+
+                        @foreach (var prod in order.OrderBillChis)
+                        {
+                            <div class="thing">
+                                <a href="product_xq.html" class="imga"><img src="@prod.Product.ProPhotes.First().ImgUrl" alt=""></a>
+                                <div class="text">
+                                    <a class="name" href="product_xq.html"><span><i>@prod.Product.Name</i><em>规格：@prod.Product.Specs</em></span><span class="price"><i>¥@prod.UnitPrice</i><em>x @prod.Qty</em></span></a>
+                                    <a class="discuss" href="center-order-pingjia.html">评价</a>
+                                </div>
+                            </div>
+                        }
+
+
+                        <div class="sum">共<i>@order.OrderBillChis.Count</i>件商品 合计：<b>¥<em>@order.SumPrice</em>(含运费¥@order.ExpressPrice)</b></div>
+
+
+                        @if (order.State == "已收货")
+                        {
+                            <div class="caozuo"><a class="deletea">删除订单</a></div>
+                        }
+                        @if (order.State == "已发货")
+                        {
+                            <div class="caozuo"><a href="center-order-wuliu.html" class="watcha">查看物流</a><a class="surea">确认收货</a><a href="center-order-shenqing.html">申请退款</a></div>
+                        }
+                        @if (order.State == "待付款")
+                        {
+                            <div class="caozuo"><a href="pay_order.html" class="paya">付款</a><a class="canclea">取消订单</a></div>
+                        }
+                        @if (order.State == "待发货")
+                        {
+                            <div class="caozuo"><a class="canclea">取消订单</a></div>
+                        }
+                        @if (order.State == "已取消")
+                        {
+                            <div class="caozuo"><a class="deletea">删除订单</a></div>
+                        }
+                    </div>
+            <div class="sg">
+                    <a class="num" href="center-order-yifahuo.html"><span>订单号：SH49871643154</span><i>卖家已发货</i></a>
+                    <div class="thing">
+                        <a href="product_xq.html" class="imga"><img src="/Content/Images/centerorder_11.png" alt=""></a>
+                        <div class="text">
+                            <a class="name" href="product_xq.html"><span><i>享食者每日混合坚果大礼包享食者每日混合坚果大礼包</i><em>规格：25g*7袋</em></span><span class="price"><i>¥90</i><em>x1</em></span></a>
+                        </div>
+                    </div>
+                    <div class="sum">
+                        共<i>1</i>件商品 合计：<b>¥<em>90</em></b>
+                    </div>
+                    <div class="caozuo">
+                        <a href="center-order-wuliu.html" class="watcha">查看物流</a><a class="surea">确认收货</a><a href="center-order-shenqing.html">申请退款</a>
+                    </div>
+                </div>
+            <div class="sg">
+                <a class="num" href="center-order-dengfukuan.html"><span>订单号：SH49871643154</span><i>等待买家付款</i></a>
+                <div class="thing">
+                    <a href="product_xq.html" class="imga"><img src="/Content/Images/centerorder_11.png" alt=""></a>
+                    <div class="text">
+                        <a class="name" href="product_xq.html"><span><i>享食者每日混合坚果大礼包享食者每日混合坚果大礼包</i><em>规格：25g*7袋</em></span><span class="price"><i>¥90</i><em>x1</em></span></a>
+                    </div>
+                </div>
+                <div class="sum">共<i>1</i>件商品 合计：<b>¥<em>90</em></b>
+                </div>
+                <div class="caozuo"><a href="pay_order.html" class="paya">付款</a><a class="canclea">取消订单</a>
+                </div>
+            </div>
+            <div class="sg">
+                <a class="num" href="center-order-dengfahuo.html"><span>订单号：SH49871643154</span><i>等待卖家发货</i></a>
+                <div class="thing">
+                    <a href="product_xq.html" class="imga"><img src="/Content/Images/centerorder_11.png" alt=""></a>
+                    <div class="text">
+                        <a class="name" href="product_xq.html"><span><i>享食者每日混合坚果大礼包享食者每日混合坚果大礼包</i><em>规格：25g*7袋</em></span><span class="price"><i>¥90</i><em>x1</em></span></a>
+                    </div>
+                </div>
+                <div class="sum">共<i>1</i>件商品 合计：<b>¥<em>90</em></b>
+                </div>
+                <div class="caozuo"><a class="canclea">取消订单</a>
+                </div>
+            </div>
+            <div class="sg">
+                <a class="num" href="center-order-guanbi.html"><span>订单号：SH49871643154</span><i>交易关闭</i></a>
+                <div class="thing">
+                    <a href="product_xq.html" class="imga"><img src="/Content/Images/centerorder_11.png" alt=""></a>
+                    <div class="text">
+                        <a class="name" href="product_xq.html"><span><i>享食者每日混合坚果大礼包享食者每日混合坚果大礼包</i><em>规格：25g*7袋</em></span><span class="price"><i>¥90</i><em>x1</em></span></a>
+                    </div>
+                </div>
+                <div class="sum">共<i>1</i>件商品 合计：<b>¥<em>90</em></b>
+                </div>
+                <div class="caozuo"><a class="deletea">删除订单</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!--个人中心-订单-->
+<!--很多弹窗-->
+<div class="popbg"></div>
+<div class="pop popdelete">
+    <h2>确认删除订单？</h2>
+    <p>您真的要删除该订单吗？</p>
+    <div class="only"><a>取消</a><a>确认</a></div>
+</div>
+<div class="pop popcancle">
+    <h2>确认取消订单？</h2>
+    <p>您真的要取消该订单吗？</p>
+    <div class="only"><a>取消</a><a>确认</a></div>
+</div>
+<div class="pop popsure">
+    <h2>确认收货</h2>
+    <p>您真的要确认收货吗？</p>
+    <div class="only"><a>取消</a><a>确认</a></div>
+</div>
+<!--很多弹窗-->
+@section style
+        {
+    <link href="/Content/CSS/center.css" type="text/css" rel="stylesheet">
+}
+        @section Script
+        {
+    <script>
+$(function () {
+    //删除订单
+    $(".caozuo .deletea").click(function() {
+        $("body,html").css({ "overflow": "hidden" });
+        $(".popbg").fadeIn();
+        $(".popdelete").fadeIn();
+                });
+
+    //取消订单
+    $(".caozuo .canclea").click(function() {
+        $("body,html").css({ "overflow": "hidden" });
+        $(".popbg").fadeIn();
+        $(".popcancle").fadeIn();
+    });
+
+    //确认收货
+    $(".caozuo .surea").click(function() {
+        $("body,html").css({ "overflow": "hidden" });
+        $(".popbg").fadeIn();
+        $(".popsure").fadeIn();
+    });
+
+    //关闭弹窗
+    $(".pop .only a").click(function() {
+        $("body,html").css({ "overflow": "auto" });
+        $(".popbg").fadeOut();
+        $(".pop").fadeOut();
+    });
+})
+</script>
+}
+

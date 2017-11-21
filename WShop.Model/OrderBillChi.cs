@@ -19,17 +19,15 @@ namespace WShop.EFModel
         [StringLength(50)]
         public string ProCode { get; set; }
 
+        public int Qty { get; set; }
+
         [Column(TypeName = "numeric")]
         public decimal UnitPrice { get; set; }
-
-        [Column(TypeName = "text")]
-        [Required]
-        public string Qty { get; set; }
 
         [Column(TypeName = "numeric")]
         public decimal SumPrice { get; set; }
 
-        public bool IdReview { get; set; }
+        public bool? IdReview { get; set; }
 
         public virtual OrderBillFath OrderBillFath { get; set; }
 

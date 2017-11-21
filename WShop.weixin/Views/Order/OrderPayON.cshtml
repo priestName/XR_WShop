@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "支付成功";
+    Layout = "~/Views/_LayoutTops.cshtml";
+}
+<!--支付成功-->
+<div class="pay_succeed">
+    <img src="/Content/Images/img_015.jpg">
+    <span>支付成功</span>
+    <p>我们会尽快为您安排发货</p>
+</div>
+<h2 class="back_index"><a href="@Url.Action("Index","Home")">返回首页</a><a class="share_btn" href="@Url.Action("OrderMain","Order",new {code=Request["code"] })">查看详情</a></h2>
+<!--支付成功-->
+

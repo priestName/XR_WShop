@@ -16,6 +16,9 @@ namespace WShop.weixin.Models
         public IEnumerable<Banner> Banners { get; set; }
         public IEnumerable<Notice> Notices { get; set; }
         public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<Product> Prod1 { get; set; }
+        public IEnumerable<Product> Prod2 { get; set; }
+        public IEnumerable<Product> Prod3 { get; set; }
         public int NoticeNum { get; set; }
         public int tid { get; set; }
         public int caresum { get; set; }

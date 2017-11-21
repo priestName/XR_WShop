@@ -27,7 +27,7 @@
 <div class="index_knowledge">
     <img src="/Content/images/icon_0902.png">
     <div class="swiper-container dlist">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper"> 
             @foreach (var notice in Model.Notices)
             {
                 <a class="swiper-slide" href="@Url.Action("Notice","Home",new {notice.ID})"><i>@notice.Lab</i>@notice.Body.Substring(3,20)...</a>
@@ -36,10 +36,36 @@
     </div>
 </div>
 <div class="index_main">
-    <p class="index_mtitle"> <a class="x" href="@Url.Action("Index","Home")">新品</a> <a href="@Url.Action("Index","Home",new { i=2})" class="r">热销</a> <a href="@Url.Action("Index","Home",new { i=3})" class="j">精品</a></p>
-    <ul>
-        @foreach (var product in Model.Products)
+    <p class="index_mtitle"> <a class="x on">新品</a> <a class="r">热销</a> <a class="j">精品</a>
+    </p>
+    <ul class="fn1">
+        @foreach (var product in Model.Prod1)
         {
+            <li>
+                <a href="@Url.Action("ProductDet", "Product", new {product.Code})"><img src="@product.ProPhotes.First().ImgUrl"></a>
+                <div class="product_text">
+                    <h2>
+                        <p>@product.Name</p>
+                        <span><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/Images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_07.png"></span>
+                    </h2>
+                    <p>@product.Intro</p>
+                    <h3>
+                        <p>
+                            <i>￥</i><b>@product.SellPrice</b>
+                            @foreach (var tag in product.Tags)
+                            {
+                                <span>@tag.Name</span>
+                            }
+                        </p>
+                        <a class="Orders" data-Pid="@product.Code">立即购买</a>
+                    </h3>
+                </div>
+            </li>
+        }
+    </ul>
+    <ul class="fn2 fnx">
+        @foreach (var product in Model.Prod2)
+            {
             <li>
                 <a href="@Url.Action("ProductDet","Product",new {product.Code})"><img src="@product.ProPhotes.First().ImgUrl"></a>
                 <div class="product_text">
@@ -49,18 +75,45 @@
                     </h2>
                     <p>@product.Intro</p>
                     <h3>
-                        <p><i>￥</i><b>@product.SellPrice</b>
-                        @foreach (var tag in product.Tags)
-                        {
-                            <span>@tag.Name</span>
-                        }
+                        <p>
+                            <i>￥</i><b>@product.SellPrice</b>
+                            @foreach (var tag in product.Tags)
+                            {
+                                <span>@tag.Name</span>
+                            }
                         </p>
-                        <a href="@Url.Action("","",new {product.Code})">立即购买</a>
+                        <a class="Orders" data-Pid="@product.Code">立即购买</a>
                     </h3>
                 </div>
             </li>
         }
     </ul>
+    <ul class="fn3 fnx">
+        @foreach (var product in Model.Prod3)
+            {
+            <li>
+                <a href="@Url.Action("ProductDet","Product",new {product.Code})"><img src="@product.ProPhotes.First().ImgUrl"></a>
+                <div class="product_text">
+                    <h2>
+                        <p>@product.Name</p>
+                        <span><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/Images/icon_06.png"><img src="/Content/images/icon_06.png"><img src="/Content/images/icon_07.png"></span>
+                    </h2>
+                    <p>@product.Intro</p>
+                    <h3>
+                        <p>
+                            <i>￥</i><b>@product.SellPrice</b>
+                            @foreach (var tag in product.Tags)
+                            {
+                                <span>@tag.Name</span>
+                            }
+                        </p>
+                        <a class="Orders" data-Pid="@product.Code">立即购买</a>
+                    </h3>
+                </div>
+            </li>
+        }
+    </ul>
+
 </div>
 <div class="index_icon">
     <p>
@@ -73,6 +126,9 @@
 @section style
 {
     <link href="/Content/css/swiper.min.css" type="text/css" rel="stylesheet">
+    <style>
+        .fnx{display: none}
+    </style>
 }
 @section Script
 {
@@ -94,23 +150,53 @@
         $(".w").removeClass("current");
         $(".g").removeClass("current");
         $(".s").addClass("current");
-        switch (@Model.tid) {
-        case 1:
+
+        $(".x").click(function() {
             $(".x").addClass("on");
             $(".r").removeClass("on");
             $(".j").removeClass("on");
-            break;
-        case 2:
+
+            $(".fn1").removeClass("fnx");
+            $(".fn2").addClass("fnx");
+            $(".fn3").addClass("fnx");
+        });
+        $(".r").click(function() {
             $(".r").addClass("on");
             $(".x").removeClass("on");
             $(".j").removeClass("on");
-            break;
-        case 3:
+
+            $(".fn1").addClass("fnx");
+            $(".fn2").removeClass("fnx");
+            $(".fn3").addClass("fnx");
+        });
+        $(".j").click(function() {
             $(".j").addClass("on");
             $(".r").removeClass("on");
             $(".x").removeClass("on");
-            break;
-        }
+
+            $(".fn1").addClass("fnx");
+            $(".fn2").addClass("fnx");
+            $(".fn3").removeClass("fnx");
+        });
+
+        $(".Orders").click(function () {
+            var pId = $(this).data("pid");
+            $.ajax({
+                url: "@Url.Action("Order", "Home")",
+                data: {
+                ProdId: pId
+            },
+            type: "post",
+            success: function (result) {
+                if (result==100) {
+                    location.href="@Url.Action("Index", "Order")";
+                } else {
+                    alert("Sorry！参数错误！");
+                }
+            }
+        });
+            
+        });
     </script>
 }
 @*</div>*@

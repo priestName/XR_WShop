@@ -12,6 +12,7 @@ namespace WShop.EFModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Customer()
         {
+            Addrresses = new HashSet<Addrress>();
             CusPods = new HashSet<CusPod>();
             OrderBillFaths = new HashSet<OrderBillFath>();
             ProReviews = new HashSet<ProReview>();
@@ -27,9 +28,6 @@ namespace WShop.EFModel
         [StringLength(50)]
         public string Phone { get; set; }
 
-        [StringLength(50)]
-        public string Addrress { get; set; }
-
         public DateTime CreateTime { get; set; }
 
         [Required]
@@ -39,6 +37,9 @@ namespace WShop.EFModel
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Addrress> Addrresses { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CusPod> CusPods { get; set; }

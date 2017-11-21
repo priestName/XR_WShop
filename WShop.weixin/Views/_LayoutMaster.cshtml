@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>@ViewBag.Title</title>
     <link href="/Content/css/Cbase.css" type="text/css" rel="stylesheet">
-    <link href="/Content/css/index.css" type="text/css" rel="stylesheet">
     @RenderSection("style", false)
     <script src="/Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
     <script src="/Scripts/base.js" type="text/javascript"></script>
-
+    @if (ViewBag.Title != "收货地址")
+    {
+        <link href="/Content/css/index.css" type="text/css" rel="stylesheet">
+    }
     @*@if (ViewBag.Title != "购物车")
     {
         <link type="text/css" rel="stylesheet" href="http://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css"/>

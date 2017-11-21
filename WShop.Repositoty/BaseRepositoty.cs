@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -64,5 +65,11 @@ namespace WShop.Repositoty
         {
             return _dbSet.Count(whereLamebda);
         }
+        public int QueryBySql(string SqlText)
+        {
+            return _dbContext.Database.ExecuteSqlCommand(SqlText);
+            //_dbSet.SqlQuery(SqlText);
+        }
+
     }
 }

@@ -16,7 +16,7 @@ namespace WShop.IService
         int GetCount(Func<TEntity, bool> whereLamebda);
         TEntity GetEntity(Func<TEntity,bool> whereLamebda);
         IEnumerable<TEntity> GetEntities(Func<TEntity, bool> whereLamebda);
-
+        int QueryBySql(string SqlText);
         IEnumerable<TEntity> GetEntitiesByPpage<TType>(int pageSize, int pageIndex, bool isAsc,
             Expression<Func<TEntity, bool>> whereLamebda, Expression<Func<TEntity, TType>> orderByLamebda);
     }

@@ -15,6 +15,7 @@ namespace WShop.weixin.Controllers
         public ICustomerService customerService { get; set; }
         public ICusPodService CusPodService { get; set; }
         public IFeedBackService FeedBackService { get; set; }
+        public IAddrressService AddrressService { get; set; }
         // GET: Customer
         public ActionResult Index()
         {
@@ -22,6 +23,7 @@ namespace WShop.weixin.Controllers
             //cusViewModel.user = Session["userinfo"] as OAuthUserInfo;
 
             cusViewModel.user = customerService.GetEntities(n => n.ID ==Convert.ToInt32(Session["cusId"]));
+            Session["tel"] = cusViewModel.user.First().Phone;
             return View(cusViewModel);
         }
 
@@ -41,7 +43,25 @@ namespace WShop.weixin.Controllers
 
         public ActionResult address()
         {
-            return View();
+            var aa = Convert.ToInt32(Session["cusId"]);
+            var addrre= AddrressService.GetEntities(n => n.CusID == aa);
+            return View(addrre);
+        }
+
+        public ActionResult addadrs(int ID=0)
+        {
+            IEnumerable<Addrress> addrre;
+            if (ID != 0)
+            {
+                addrre = AddrressService.GetEntities(n => n.ID == ID);
+                Session["ars"] = 1;
+            }
+            else
+            {
+                addrre = AddrressService.GetEntities(n => true);
+                Session["ars"] = 0;
+            }
+            return View(addrre);
         }
 
         //单个删除

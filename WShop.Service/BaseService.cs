@@ -55,10 +55,13 @@ namespace WShop.Service
         {
             return _baseRepositoty.GetEntitiesByuPage(pageSize, pageIndex, isAsc, whereLamebda, orderByLamebda);
         }
-
         public int GetCount(Func<TEntity, bool> whereLamebda)
         {
             return _baseRepositoty.QueryCount(whereLamebda);
+        }
+        public int QueryBySql(string SqlText)
+        {
+             return _baseRepositoty.QueryBySql(SqlText);
         }
     }
 }

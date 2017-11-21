@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddrressRepositoty.cs" />
     <Compile Include="BannerRepositoty.cs" />
     <Compile Include="BaseRepositoty.cs" />
     <Compile Include="CusPodRepositoty.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="DbConexFactory.cs" />
     <Compile Include="FeedBackRepositoty.cs" />
     <Compile Include="NoticeRepositoty.cs" />
+    <Compile Include="OrderRepositoty.cs" />
     <Compile Include="ProductRepositoty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopCartRepositoty.cs" />

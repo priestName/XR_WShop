@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="Addrress.cs" />
     <Compile Include="Banner.cs" />
     <Compile Include="CusPod.cs" />
     <Compile Include="Customer.cs" />

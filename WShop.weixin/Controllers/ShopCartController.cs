@@ -17,8 +17,11 @@ namespace WShop.weixin.Controllers
         {
             int ID =Convert.ToInt32(Session["cusId"]);
             var shopcaer= CustomerService.GetEntities(b => b.ID== ID);
+            var cus = CustomerService.GetEntity(n => n.ID == Convert.ToInt32(Session["cusId"]));
+            Session["tel"] = cus.Phone;
             return View(shopcaer);
         }
+
 
         public void upCart()
         {
@@ -38,7 +41,6 @@ namespace WShop.weixin.Controllers
                 {
                     shu = 1;
                 }
-
             }
             else
             {
@@ -47,26 +49,31 @@ namespace WShop.weixin.Controllers
                 {
                     shu = 1;
                 }
-
             }
             Response.ContentType = "text/plain";
             Response.Write(shu);
             Response.End();
         }
 
-        public void delectCart()
+        public void CarOrder()
         {
-            string aa = "删除失败";
+            int aa = 0;
             string code = Request["codes"];
+            var codes = code.Substring(0,code.Length-1).Split(';');
             int cusid = Convert.ToInt32(Session["cusId"]);
-            if (code.Length==13)
+            foreach (var co in codes)
             {
-                code = "0" + code;
-            }
-            var shopcart=ShopCartService.GetEntity(n => n.ProCode == code && n.CusId == cusid);
-            if (ShopCartService.Remov(shopcart))
-            {
-                aa = "删除成功";
+                var shopcart = ShopCartService.GetEntity(n => n.ProCode == co && n.CusId == cusid);
+                shopcart.checks = 1;
+                if (ShopCartService.Add(shopcart))
+                {
+                    aa = 0;
+                }
+                else
+                {
+                    aa = 2000;
+                    return;
+                }
             }
             Response.ContentType = "text/plain";
             Response.Write(aa);

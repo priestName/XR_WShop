@@ -23,6 +23,8 @@ namespace WShop.EFModel
 
         public DateTime CreateTime { get; set; }
 
+        public int? checks { get; set; }
+
         public virtual Customer Customer { get; set; }
 
         public virtual Product Product { get; set; }

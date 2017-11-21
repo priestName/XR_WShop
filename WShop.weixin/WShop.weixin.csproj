@@ -299,6 +299,7 @@
     </Compile>
     <Compile Include="Models\CusViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\SortViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -328,6 +329,10 @@
     <Content Include="Views\Customer\LikePro.cshtml" />
     <Content Include="Views\Customer\address.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Customer\addadrs.cshtml" />
+    <Content Include="Views\Order\OrderPay.cshtml" />
+    <Content Include="Views\Order\OrderPayON.cshtml" />
+    <Content Include="Views\Order\OrderList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,6 +13,7 @@ namespace WShop.EFModel
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Addrress> Addrresses { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<CusPod> CusPods { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -41,6 +42,10 @@ namespace WShop.EFModel
                 .Property(e => e.BillCode)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Addrress>()
+                .Property(e => e.Tel)
+                .IsFixedLength();
+
             modelBuilder.Entity<CusPod>()
                 .Property(e => e.ProCode)
                 .IsUnicode(false);
@@ -52,6 +57,11 @@ namespace WShop.EFModel
             modelBuilder.Entity<Customer>()
                 .Property(e => e.Phone)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Addrresses)
+                .WithOptional(e => e.Customer)
+                .HasForeignKey(e => e.CusID);
 
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.CusPods)
@@ -98,15 +108,15 @@ namespace WShop.EFModel
                 .HasPrecision(10, 2);
 
             modelBuilder.Entity<OrderBillChi>()
-                .Property(e => e.Qty)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<OrderBillChi>()
                 .Property(e => e.SumPrice)
                 .HasPrecision(10, 2);
 
             modelBuilder.Entity<OrderBillFath>()
                 .Property(e => e.Code)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<OrderBillFath>()
+                .Property(e => e.State)
                 .IsUnicode(false);
 
             modelBuilder.Entity<OrderBillFath>()
@@ -132,9 +142,8 @@ namespace WShop.EFModel
 
             modelBuilder.Entity<Payment>()
                 .HasMany(e => e.OrderBillFaths)
-                .WithRequired(e => e.Payment)
-                .HasForeignKey(e => e.PayId)
-                .WillCascadeOnDelete(false);
+                .WithOptional(e => e.Payment)
+                .HasForeignKey(e => e.PayId);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.Code)

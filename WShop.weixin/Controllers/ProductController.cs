@@ -44,9 +44,16 @@ namespace WShop.weixin.Controllers
             shopcCart.Qty = Convert.ToInt32(Request["num"]);
             shopcCart.CusId = Convert.ToInt32(Session["cusId"]);
             shopcCart.CreateTime=DateTime.Now;
+            shopcCart.checks = 0;
             var shca = ShopCartService.GetEntities(n => n.CusId == shopcCart.CusId && n.ProCode == shopcCart.ProCode);
+            
             if (shca.Count()>0)
             {
+                if (shca.First().Qty + shopcCart.Qty >= 5)
+                {
+                    ts = "购物车内该物品数量已达到上限";
+                    return;
+                }
                 shopcCart.Qty += shca.First().Qty;
                 if (ShopCartService.Add(shopcCart))
                 {
@@ -62,6 +69,46 @@ namespace WShop.weixin.Controllers
             Response.End();
         }
 
+        public void addorder()
+        {
+            var ts = 0;
+            var Num = Convert.ToInt32(Request["proNum"]);
+            var Code = Request["proCode"].ToString();
+            ShoppingCart shopcCart = new ShoppingCart();
+            shopcCart.ProCode = Code;
+            shopcCart.Qty = Num;
+            shopcCart.CusId = Convert.ToInt32(Session["cusId"]);
+            shopcCart.CreateTime = DateTime.Now;
+            shopcCart.checks = 1;
+            if (Num > ProductService.GetEntity(n => n.Code == Code).Stock.QTY)
+            {
+                ts = 2000;
+            }
+            var shca = ShopCartService.GetEntities(n => n.CusId == shopcCart.CusId && n.ProCode == shopcCart.ProCode);
+            if (shca.Count() > 0)
+            {
+                if (ShopCartService.Add(shopcCart))
+                {
+                    ts = shca.First().Qty;
+                }
+                else
+                {
+                    ts = 2000;
+                }
+            }
+            else if (ShopCartService.Add(shopcCart))
+            {
+                ts = 0;
+            }
+            else
+            {
+                ts = 2000;
+            }
+            Response.ContentType = "text/plain";
+            Response.Write(ts);
+            Response.End();
+
+        }
         public void LikePro()
         {
             string ts = "";

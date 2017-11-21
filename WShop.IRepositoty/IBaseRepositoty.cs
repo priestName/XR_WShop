@@ -16,7 +16,7 @@ namespace WShop.IRepositoty
         int QueryCount(Func<TEntity, bool> whereLamebda);
         TEntity QueryEntity(Func<TEntity, bool> whereLamebda);
         IEnumerable<TEntity> QueryEntities(Func<TEntity, bool> whereLamebda);
-
+        int QueryBySql(string SqlText);
         IEnumerable<TEntity> GetEntitiesByuPage<TType>(int pageSize, int pageIndex, bool isAsc,
             Expression<Func<TEntity, bool>> whereLamebda, Expression<Func<TEntity, TType>> orderByLamebda);
     }

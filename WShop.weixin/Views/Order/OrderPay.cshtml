@@ -1,0 +1,47 @@
+﻿@model WShop.EFModel.OrderBillFath
+@{
+    ViewBag.Title = "支付订单";
+    Layout = "~/Views/_LayoutTops.cshtml";
+}
+<div class="number">
+    <p><span>订单编号：@Model.Code</span><i>等待付款</i></p>
+</div>
+<p class="money"><span>支付金额</span><i>¥@Model.SumPrice</i></p>
+<div class="pay_way">
+    <span>选择支付方式</span>
+    <p><label><img src="/Content/Images/icon_034.png"><i>微信支付</i><input type="radio" name="way" value="1"></label></p>
+    <p><label><img src="/Content/Images/icon_035.png"><i>支付宝支付</i><input type="radio" name="way" value="2"></label></p>
+</div>
+<a class="confirm_pay">确认支付</a>
+@section Script
+{
+    <script>
+        $(function() {
+            $(".pay_way p").click(function() {
+                $(".pay_way p").removeClass("on");
+                $(this).addClass("on");
+            });
+        });
+        $(".confirm_pay").click(function() {
+            ways = document.getElementsByName("way");
+            var Pay;
+            for (i in ways) {
+                if (ways[i].checked) {
+                    Pay=ways[i].value;
+                }
+            }
+            $.ajax({
+                url: "@Url.Action("OrderUp", "Order")",
+                data: {Code:@Model.Code,PayId:Pay},
+                type: "post",
+                success: function (result) {
+                    if (result==100) {
+                        location.href="@Url.Action("OrderPayON","Order",new { Model.Code })";
+                    } else {
+                        alert("支付失败");
+                    }
+                }
+            });
+        });
+</script>
+}

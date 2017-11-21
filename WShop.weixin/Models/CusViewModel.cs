@@ -11,5 +11,7 @@ namespace WShop.weixin.Models
     {
         //public OAuthUserInfo user { get; set; }
         public IEnumerable<Customer> user { get; set; }
+        public string Num;
+        public IEnumerable<Product> products { get; set; }
     }
 }

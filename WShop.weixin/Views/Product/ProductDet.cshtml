@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WShop.EFModel.Product>
+﻿@using System.Web.Razor
+@model IEnumerable<WShop.EFModel.Product>
 @{
     ViewBag.Title = "产品详情";
     Layout = "~/Views/_LayoutMaster.cshtml";
@@ -67,7 +68,12 @@
 
 <!---banner over--->
 <div class="pro_standard">
-    <div class="shu"><i>购买数量</i><span class="jia"><img src="/Content/Images/icon_017.png"></span><input class="shopcart-td-num proNum" type="text" value="1" /><span class="jian"><img src="/Content/Images/icon_016.png"></span></div>
+    <div class="shu">
+        <i>购买数量</i>
+        <span class="jia"><img src="/Content/Images/icon_017.png"></span>
+        <input class="shopcart-td-num proNum" type="text" value="1"/>
+        <span class="jian"><img src="/Content/Images/icon_016.png"></span>
+    </div>
 </div>
 <div class="pro_description modular">
     <h2><span>商品描述</span></h2>
@@ -82,6 +88,7 @@
             <tr><td>类别</td><td>@Model.First().Sorts.First().Name</td></tr>
             <tr><td>作者</td><td>@Model.First().Writer</td></tr>
             <tr><td>规格</td><td>@Model.First().Specs</td></tr>
+            <tr><td>快递</td>@if (Model.First().IsPinkage){<td>快递费￥15</td>}else{<td>免邮费</td>}</tr>
         </table>
     </div>
 </div>
@@ -140,7 +147,7 @@
 @section style
 {
     <link href="/Content/css/swiper.min.css" type="text/css" rel="stylesheet">
-<link href="/Content/css/fullscreenstyle.css" type="text/css" rel="stylesheet">
+    <link href="/Content/css/fullscreenstyle.css" type="text/css" rel="stylesheet">
 }
 @section Script
 {
@@ -303,7 +310,26 @@
                 }
             });
         });
+        $(".shops").click(function() {
+            var Num = $(".proNum").val();
+            var code=@Model.First().Code;
+            $.ajax({
+                url: "@Url.Action("addorder", "Product")",
+                data: {
+                    proNum: Num,
+                    proCode:"@Model.First().Code"
+                },
+            type: "post",
+            success: function(result) {
+                if (result != 2000) {
+                    location.href = "@Url.Action("Index","Order")"+"?num="+result;
+                } else {
+                    alert("对不起！产品参数错误！");
+                }
 
+            }
+        });
+        });
         $(function() {
             if (@Model.First().CusPods.Count > 0) {
                 $(".Like").addClass("on");

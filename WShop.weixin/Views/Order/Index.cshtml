@@ -1,4 +1,4 @@
-﻿
+﻿@model WShop.weixin.Models.OrderViewModel
 @{
     ViewBag.Title = "确认订单";
     Layout = "~/Views/_LayoutTops.cshtml";
@@ -6,34 +6,59 @@
 
 <div class="address">
     <div>
-        <h2><span>收货人: 王名扬</span><i>13201562356</i></h2>
-        <p>收货地址：河南省郑州市金水区中州大道与商都路交叉口建业五栋大楼</p>
+        <h2><span>收货人: @Model.Addrresses.Aname</span><i>@Model.Addrresses.Tel</i></h2>
+        <p>收货地址：@Model.Addrresses.Address@Model.Addrresses.AddressMain</p>
     </div>
 </div>
 <div class="goods_list">
     <h2>商品清单</h2>
     <ul>
-        <li>
-            <a href="product_xq.html">
-                <img src="/Content/Images/img_014.jpg">
-                <div>
-                    <p>香榧樵农特级香榧枫桥香榧子500g包邮浙江特...</p><span>规格：500g/袋</span>
-                    <h3><span>¥90.00</span><i>x1</i></h3>
-                </div>
-            </a>
-        </li>
+        @foreach (var prod in Model.ShoppingCarts)
+        {
+            <li>
+                <a>
+                    <img src="@prod.Product.ProPhotes.First().ImgUrl">
+                    <div>
+                        <p>@prod.Product.Name...</p><span>规格：@prod.Product.Specs</span>
+                        <h3>
+                            <span>¥@prod.Product.SellPrice</span><i>x @prod.Qty</i>
+                        </h3>
+                    </div>
+                </a>
+            </li>
+        }
     </ul>
 </div>
-<div class="delivery">
-    <span>配送费</span><p>免邮费/快递费<i>￥15</i></p>
-</div>
+<div class="delivery"><span>配送费</span><p>快递费<i>￥15</i></p></div>
 <div class="message">
     <label>留言备注</label>
-    <textarea rows="2" placeholder="请输入您想要备注的内容"></textarea>
+    <textarea rows="2" class="tm" placeholder="请输入您想要备注的内容"></textarea>
 </div>
-<p class="sunm">共<i>2</i>件商品，合计:<i>￥285</i>(含快递费)</p>
+<p class="sunm">共<i>@Model.ShoppingCarts.Count()</i>件商品，合计:<i>￥@Model.price</i>(含快递费)</p>
 <div class="amount">
-    <span>需付:<i>￥285</i></span>
-    <a href="pay_order.html">提交订单</a>
+    <span>需付:<i>￥@Model.price</i></span>
+    <a>提交订单</a>
 </div>
-
+@section Script
+{
+    <script>
+        $(".amount a").click(function () {
+            var text = $(".tm").val();
+            $.ajax({
+                url: "@Url.Action("addOrder", "Order")",
+                data: {
+                    Memo: text
+                },
+            type: "post",
+            success: function (result) {
+                if (result=="200") {
+                    alert("Sorry！参数错误！订单提交失败");
+                } else {
+                    alert(result);
+                    location.href = "@Url.Action("OrderPay","Order")?code=" + result;
+                }
+            }
+            });
+        });
+    </script>
+}

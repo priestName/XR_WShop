@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAddrressRepositoty.cs" />
     <Compile Include="IBannerRepositoty.cs" />
     <Compile Include="IBaseRepositoty.cs" />
     <Compile Include="ICusPodRepositoty.cs" />
     <Compile Include="ICustomerRepositoty.cs" />
     <Compile Include="IFeedBackRepositoty.cs" />
     <Compile Include="INoticeRepositoty.cs" />
+    <Compile Include="IOrderRepositoty.cs" />
     <Compile Include="IProductRepositoty.cs" />
     <Compile Include="IShopCartRepositoty.cs" />
     <Compile Include="IUserRepositoty.cs" />

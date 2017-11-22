@@ -47,11 +47,12 @@ namespace WShop.weixin.Controllers
         {
             return View();
         }
-        public ActionResult OrderList()
+        public ActionResult OrderList(int clas=0)
         {
+            orderViewModel.clas = clas;
             int cusid = Convert.ToInt32(Session["cusId"]);
-            var ord= OrddeService.GetEntities(n => n.CusId == cusid);
-            return View(ord);
+            orderViewModel.OrderBillFaths= OrddeService.GetEntities(n => n.CusId == cusid);
+            return View(orderViewModel);
         }
         public void addOrder()
         {
@@ -94,10 +95,57 @@ namespace WShop.weixin.Controllers
             var PayId =Convert.ToInt32(Request["PayId"]);
             var order=OrddeService.GetEntity(n => n.Code == code);
             order.PayId = PayId;
-            order.State = "已付款";
+            order.State = "已发货";
             order.PayTime=DateTime.Now;
             order.PostTime= DateTime.Now.AddMinutes(1);
             if (OrddeService.Add(order))
+            {
+                aa = 100;
+            }
+            Response.ContentType = "text/plain";
+            Response.Write(aa);
+            Response.End();
+        }
+        //删除订单
+        public void delect()
+        {
+            var aa = 200;
+            //exec DelOrder '717112117155703'
+            string OrCode = Request["OrId"];
+            var nums=OrddeService.GetEntity(n => n.Code == OrCode).OrderBillChis.Count()+1;
+            var sql = $"exec DelOrder '{OrCode}'";
+            if (OrddeService.QueryBySql(sql) == nums)
+            {
+                aa = 100;
+            }
+            Response.ContentType = "text/plain";
+            Response.Write(aa);
+            Response.End();
+        }
+        //收货
+        public void shouhuo()
+        {
+            var aa = 200;
+            string OrCode = Request["OrId"];
+            var ord= OrddeService.GetEntity(n => n.Code == OrCode);
+            ord.State = "已收货";
+            ord.ReceTime=DateTime.Now;
+            if (OrddeService.Add(ord))
+            {
+                aa = 100;
+            }
+            Response.ContentType = "text/plain";
+            Response.Write(aa);
+            Response.End();
+        }
+        //取消订单
+        public void ORDWORD()
+        {
+            var aa = 200;
+            string OrCode = Request["OrId"];
+            var ord = OrddeService.GetEntity(n => n.Code == OrCode);
+            ord.State = "已取消";
+            if (OrddeService.Add(ord))
             {
                 aa = 100;
             }

@@ -54,7 +54,6 @@
                 if (result=="200") {
                     alert("Sorry！参数错误！订单提交失败");
                 } else {
-                    alert(result);
                     location.href = "@Url.Action("OrderPay","Order")?code=" + result;
                 }
             }

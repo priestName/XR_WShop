@@ -13,13 +13,13 @@
     </div>
     <div class="link">
         <div class="sg">
-            <a class="biga" href="center-order.html"><span class="bg1">我的订单</span><i>查看全部订单</i></a>
+            <a class="biga" href="@Url.Action("OrderList","Order")"><span class="bg1">我的订单</span><i>查看全部订单</i></a>
             <div class="kind">
-                <a href="center-order.html"><img src="/Content/Images/centericon_29.png" alt=""><i>待付款</i><b>15</b></a>
-                <a href="center-order.html"><img src="/Content/Images/centericon_19.png" alt=""><i>待发货</i></a>
-                <a href="center-order.html"><img src="/Content/Images/centericon_22.png" alt=""><i>待收货</i></a>
-                <a href="center-order.html"><img src="/Content/Images/centericon_24.png" alt=""><i>待评价</i></a>
-                <a href="center-order-return.html"><img src="/Content/Images/centericon_26.png" alt=""><i>退款/售后</i></a>
+                <a href="@Url.Action("OrderList","Order",new {clas=1})"><img src="/Content/Images/centericon_29.png" alt=""><i>待付款</i><b>15</b></a>
+                <a href="@Url.Action("OrderList","Order",new {clas=2})"><img src="/Content/Images/centericon_19.png" alt=""><i>待发货</i></a>
+                <a href="@Url.Action("OrderList","Order",new {clas=3})"><img src="/Content/Images/centericon_22.png" alt=""><i>待收货</i></a>
+                <a href="@Url.Action("OrderList","Order",new {clas=4})"><img src="/Content/Images/centericon_24.png" alt=""><i>待评价</i></a>
+                <a href="@Url.Action("OrderList","Order",new {clas=5})"><img src="/Content/Images/centericon_26.png" alt=""><i>退款/售后</i></a>
             </div>
         </div>
         <div class="sg">

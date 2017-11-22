@@ -12,5 +12,8 @@ namespace WShop.weixin.Models
         public Addrress Addrresses;
         public int ProNum;
         public decimal price;
+
+        public IEnumerable<OrderBillFath> OrderBillFaths { get; set; }
+        public int clas;
     }
 }

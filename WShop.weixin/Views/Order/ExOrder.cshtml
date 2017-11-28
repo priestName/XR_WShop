@@ -1,0 +1,33 @@
+﻿@model WShop.EFModel.OrderBillFath
+@{
+    ViewBag.Title = "物流信息";
+    Layout = "~/Views/_LayoutTops.cshtml";
+}
+<!--个人中心-订单-物流中心-->
+<div class="orderwuliu">
+    <div class="goods">
+        <a class="imga"><img src="@Model.OrderBillChis.First().Product.ProPhotes.First().ImgUrl" alt=""><i>@Model.OrderBillChis.Sum(n=>n.Qty) 件商品</i></a>
+        <p><span>物流状态：</span><i>已签收</i><br>承运公司：申通快递<br>运单编号：330994646576<br>官方电话：<a href="tel:95543">95543</a></p>
+    </div>
+    <div class="trace">
+        <h2><span>物流追踪</span></h2>
+        <div class="list">
+            <div class="sg">
+                <p>已签收，签收人是本人签收，感谢使用申通快递，期待再次为您服务。</p>
+                <h6>2016-06-20 12:51:42</h6>
+            </div>
+            <div class="sg">
+                <p>快件已经到达郑州市，并且很快会被派送，请保持手机通话顺畅！</p>
+                <h6>2016-06-19 12:51:42</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<!--个人中心-订单-物流中心-->
+
+<!--很多弹窗-->
+@section style
+{
+    <link href="/Content/CSS/center.css" type="text/css" rel="stylesheet">
+}
+

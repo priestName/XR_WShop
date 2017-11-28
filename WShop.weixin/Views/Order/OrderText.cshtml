@@ -1,0 +1,45 @@
+﻿@model WShop.EFModel.OrderBillChi
+@{
+    ViewBag.Title = "商品评价";
+    Layout = "~/Views/_LayoutTops.cshtml";
+}
+
+<div class="orderpingjia">
+    <div class="goods">
+        <a class="imga" href="product_xq.html"><img src="@Model.Product.ProPhotes.First().ImgUrl" alt=""></a>
+        <a class="text" href="product_xq.html"><span>@Model.Product.Name</span><i>¥36</i></a>
+    </div>
+    <div class="pingjia">
+        <h2><span>评价</span></h2>
+        <div class="fill">
+            <textarea placeholder="请输入评价内容"></textarea>
+            <div class="imgbox">
+                <a class="adda"><img src="/Content/Images/orderpingjia_06.png" alt="" class="zs"><input class="files" type="file"></a>
+            </div>
+            <div class="score"><span>商品评分</span><em><i></i><i></i><i></i><i></i><i></i></em></div>
+        </div>
+    </div>
+</div>
+<a class="makesure">提交信息</a>
+@section style
+{
+    <link href="/Content/CSS/center.css" type="text/css" rel="stylesheet">
+}
+@section Script
+{
+    <script>
+    $(function() {
+        $(".score em i").hover(function() {
+            var n = $(this).index() + 1;
+            $(".score em i").removeClass("on");
+            for (var i = 0; i < n; i++) {
+                $(".score em i").eq(i).addClass("on");
+            }
+        });
+        $(".imga .close").click(function() {
+            $(this).parents(".imga").hide();
+        });
+
+    })
+</script>
+}

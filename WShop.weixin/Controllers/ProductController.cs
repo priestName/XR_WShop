@@ -35,7 +35,6 @@ namespace WShop.weixin.Controllers
             var Products = ProductService.GetEntities(n => n.Code==code);
             return View(Products);
         }
-
         public void addProd()
         {
             string ts = "加入购物车失败";

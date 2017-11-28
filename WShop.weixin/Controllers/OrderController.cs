@@ -54,9 +54,30 @@ namespace WShop.weixin.Controllers
             orderViewModel.OrderBillFaths= OrddeService.GetEntities(n => n.CusId == cusid);
             return View(orderViewModel);
         }
+
+        public ActionResult ExOrder(string Code)
+        {
+            var ord=OrddeService.GetEntity(n => n.Code == Code);
+            return View(ord);
+        }
+
+        public ActionResult OrderText(string ProCode, string Code)
+        {
+            OrderBillChi OrdPro=new OrderBillChi();
+            foreach (var OrderBillChi in OrddeService.GetEntity(n => n.Code == Code).OrderBillChis)
+            {
+                if (OrderBillChi.ProCode==ProCode)
+                {
+                    OrdPro = OrderBillChi;
+                }
+            }
+            
+            return View(OrdPro);
+        }
         public void addOrder()
         {
               var aa = "200";
+            
             var pink = 0;
             var memo = Request["Memo"];
             if (memo == "")

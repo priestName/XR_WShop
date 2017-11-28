@@ -333,6 +333,9 @@
     <Content Include="Views\Order\OrderPay.cshtml" />
     <Content Include="Views\Order\OrderPayON.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
+    <Content Include="Views\Order\ExOrder.cshtml" />
+    <Content Include="Views\Order\OrderText.cshtml" />
+    <Content Include="Views\Order\OrderMain.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

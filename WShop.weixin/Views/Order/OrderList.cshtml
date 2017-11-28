@@ -27,8 +27,8 @@
         @foreach (var order in Model.OrderBillFaths)
         {
                         <div class="sg ysh">
-                            <a class="num order" href="center-order-success.html"><span>订单号：@order.Code</span>
-                                @if (order.State == "已收货")
+                            <a class="num order" href="@Url.Action("OrderMain","Order")"><span>订单号：@order.Code</span>
+                                @if (order.State == "已收货"|| order.State == "已完成")
                                 {
                                     <i class="state">交易成功</i>
                                 }
@@ -53,16 +53,23 @@
                         @foreach (var prod in order.OrderBillChis)
                         {
                             <div class="thing">
-                                <a href="product_xq.html" class="imga"><img src="@prod.Product.ProPhotes.First().ImgUrl" alt=""></a>
+                                <a href="@Url.Action("ProductDet","Product",new {prod.Product.Code})" class="imga"><img src="@prod.Product.ProPhotes.First().ImgUrl" alt=""></a>
                                 <div class="text">
-                                    <a class="name" href="product_xq.html"><span><i>@prod.Product.Name</i><em>规格：@prod.Product.Specs</em></span><span class="price"><i>¥@prod.UnitPrice</i><em>x @prod.Qty</em></span></a>
-                                    <a class="discuss" href="center-order-pingjia.html">评价</a>
+                                    <a class="name" href="@Url.Action("ProductDet","Product",new {prod.Product.Code})"><span><i>@prod.Product.Name</i><em>规格：@prod.Product.Specs</em></span><span class="price"><i>¥@prod.UnitPrice</i><em>x @prod.Qty</em></span></a>
+                                        @if (order.State == "已收货")
+                                        {
+                                            <a class="discuss" href="@Url.Action("OrderText","Order",new {ProCode=prod.Product.Code,prod.Code })">评价</a>
+                                        }
+                                        @if (order.State == "已完成")
+                                        {
+                                            <a class="discuss" href="@Url.Action("","Order",new {ProCode=prod.Product.Code,prod.Code })">查看评价</a>
+                                        }
                                 </div>
                             </div>
                         }
 
 
-                        <div class="sum">共<i>@order.OrderBillChis.Count</i>件商品 合计：<b style="color: #000">¥<em style="color: red">@order.SumPrice</em>(含运费¥@order.ExpressPrice)</b></div>
+                        <div class="sum">共<i>@order.OrderBillChis.Sum(n=>n.Qty)</i>件商品 合计：<b style="color: #000">¥<em style="color: red">@order.SumPrice</em>(含运费¥@order.ExpressPrice)</b></div>
 
 
                         @if (order.State == "已收货")
@@ -71,7 +78,7 @@
                         }
                         @if (order.State == "已发货")
                         {
-                            <div class="caozuo"><a href="@Url.Action("","",new {order.Code})" class="watcha">查看物流</a><a class="surea">确认收货</a><a href="@Url.Action("","",new {order.Code})">申请退款</a></div>
+                            <div class="caozuo"><a href="@Url.Action("ExOrder","Order",new {order.Code})" class="watcha">查看物流</a><a class="surea">确认收货</a><a href="@Url.Action("","Order",new {order.Code})">申请退款</a></div>
                         }
                         @if (order.State == "待付款")
                         {

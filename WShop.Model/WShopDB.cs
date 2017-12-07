@@ -140,6 +140,12 @@ namespace WShop.EFModel
                 .WithRequired(e => e.OrderBillFath)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<OrderBillFath>()
+                .HasMany(e => e.ProReviews)
+                .WithRequired(e => e.OrderBillFath)
+                .HasForeignKey(e => e.OrderCode)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Payment>()
                 .HasMany(e => e.OrderBillFaths)
                 .WithOptional(e => e.Payment)
@@ -215,6 +221,10 @@ namespace WShop.EFModel
 
             modelBuilder.Entity<ProReview>()
                 .Property(e => e.Body)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProReview>()
+                .Property(e => e.OrderCode)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ShoppingCart>()

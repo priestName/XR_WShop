@@ -30,13 +30,14 @@ namespace WShop.EFModel
         [StringLength(500)]
         public string img { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string OrderCode { get; set; }
 
         public virtual Customer Customer { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual OrderBillFath OrderBillFath { get; set; }
 
-        public virtual Product OrderBillFath { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

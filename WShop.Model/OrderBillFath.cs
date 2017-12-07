@@ -13,6 +13,7 @@ namespace WShop.EFModel
         public OrderBillFath()
         {
             OrderBillChis = new HashSet<OrderBillChi>();
+            ProReviews = new HashSet<ProReview>();
         }
 
         [Key]
@@ -56,5 +57,8 @@ namespace WShop.EFModel
         public virtual ICollection<OrderBillChi> OrderBillChis { get; set; }
 
         public virtual Payment Payment { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProReview> ProReviews { get; set; }
     }
 }
